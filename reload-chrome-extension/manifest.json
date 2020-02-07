@@ -1,0 +1,13 @@
+{
+  "name": "Reload Chrome Extension",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "omnibox": {
+    "keyword": "/"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": ["reload.js"]
+  },
+  "permissions": ["management"]
+}
