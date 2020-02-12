@@ -38,6 +38,21 @@ declare namespace chrome {
     }
   }
 
+  namespace storage {
+    interface StorageArea {
+      get(
+        keys: string | string[] | { [x: string]: true } | null,
+        cb: (items: Record<string, unknown>) => void
+      ): void;
+      set(keys: { [x: string]: unknown }, cb?: () => void): void;
+      remove(keys: string | string[], cb?: () => void): void;
+    }
+
+    const sync: StorageArea;
+    const local: StorageArea;
+    const managed: StorageArea;
+  }
+
   namespace tabs {
     interface CreateProperties {
       windowId?: number;

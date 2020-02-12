@@ -8,5 +8,6 @@
   "background": {
     "persistent": false,
     "scripts": ["background.js"]
-  }
+  },
+  "permissions": ["storage"]
 }

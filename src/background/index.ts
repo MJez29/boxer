@@ -4,20 +4,33 @@ chrome.omnibox.setDefaultSuggestion({
   description: "Boxer"
 });
 
-const options = [
-  {
-    content: "https://github.com/MJez29",
-    description: "github"
-  }
-];
+console.log(chrome);
+
+chrome.storage.local.set({
+  options: [
+    {
+      content: "https://github.com/MJez29",
+      description: "github"
+    }
+  ]
+});
 
 chrome.omnibox.onInputChanged.addListener((input, suggest) => {
-  suggest(getSuggestions(input, options));
+  chrome.storage.local.get("options", results => {
+    console.log(results);
+    if (results.options) {
+      suggest(
+        getSuggestions(input, results.options as chrome.omnibox.SuggestResult[])
+      );
+    } else {
+      suggest([]);
+    }
+  });
 });
 
 chrome.omnibox.onInputEntered.addListener((url, disposition) => {
   if (!url.startsWith("http")) {
-    url = getBestSuggestion(url, options).content;
+    url = getBestSuggestion(url, []).content;
   }
 
   switch (disposition) {
