@@ -1,31 +1,20 @@
-import { getSuggestions, getBestSuggestion } from "./getSuggestions";
+import { getSuggestions, getBestSuggestion } from "../lib/suggestions";
+import { validateStorage, Alias, getAliases } from "../lib/storage";
 
 chrome.omnibox.setDefaultSuggestion({
   description: "Boxer"
 });
 
-console.log(chrome);
+let cachedAliases: Alias[] = [];
 
-chrome.storage.local.set({
-  options: [
-    {
-      content: "https://github.com/MJez29",
-      description: "github"
-    }
-  ]
+chrome.omnibox.onInputStarted.addListener(async () => {
+  cachedAliases = await getAliases();
+  console.log("onInputStarted", cachedAliases);
 });
 
-chrome.omnibox.onInputChanged.addListener((input, suggest) => {
-  chrome.storage.local.get("options", results => {
-    console.log(results);
-    if (results.options) {
-      suggest(
-        getSuggestions(input, results.options as chrome.omnibox.SuggestResult[])
-      );
-    } else {
-      suggest([]);
-    }
-  });
+chrome.omnibox.onInputChanged.addListener(async (input, suggest) => {
+  console.log("onInputChanged", cachedAliases);
+  suggest(getSuggestions(input, cachedAliases));
 });
 
 chrome.omnibox.onInputEntered.addListener((url, disposition) => {
@@ -44,4 +33,8 @@ chrome.omnibox.onInputEntered.addListener((url, disposition) => {
       chrome.tabs.create({ url, active: false });
       break;
   }
+});
+
+chrome.runtime.onInstalled.addListener(() => {
+  validateStorage();
 });

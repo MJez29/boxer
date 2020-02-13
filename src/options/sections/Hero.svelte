@@ -2,6 +2,17 @@
   import TextInput from "../components/TextInput";
   import Card from "../components/Card";
   import Label from "../components/Label";
+  import Button from "../components/Button";
+  import { saveAlias } from "../../lib/storage";
+
+  let name = "";
+  let link = "";
+
+  async function onSave() {
+    alert("Saving");
+    await saveAlias(name, link);
+    alert("Alias saved!");
+  }
 </script>
 
 <style>
@@ -18,11 +29,14 @@
   <div class="flex">
     <div class="f30">
       <Label>Name</Label>
-      <TextInput />
+      <TextInput bind:value={name} />
     </div>
     <div class="f30">
       <Label>Link</Label>
-      <TextInput />
+      <TextInput bind:value={link} />
+    </div>
+    <div>
+      <Button on:click={onSave}>Save</Button>
     </div>
   </div>
 </Card>

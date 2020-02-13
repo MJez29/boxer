@@ -15,7 +15,6 @@ class ReloadChromeExtensionPlugin {
   apply(compiler) {
     compiler.hooks.done.tap("Reload Chrome Extension Plugin", stats => {
       if (this.ws) {
-        console.log(`Reload chrome extension ${++this.x}!`);
         this.ws.send(this.manifestName);
       }
     });

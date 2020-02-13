@@ -1,18 +1,23 @@
 <script>
-  export let placeholder = "";
+  import { createEventDispatcher } from "svelte";
 
-  let value = "";
+  export let placeholder = "";
+  export let value = "";
 
   let focused = false;
 
+  const dispatch = createEventDispatcher();
+
   function onFocus() {
-    console.log("focus");
     focused = true;
   }
 
   function onBlur() {
-    console.log("blur");
     focused = false;
+  }
+
+  function onInput(event) {
+    dispatch("input", event.target.value);
   }
 
   $: focusClass = focused ? "focus" : "";
@@ -58,10 +63,11 @@
 
 <div class="container">
   <input
-    {value}
     class="input"
     on:focus={onFocus}
     on:blur={onBlur}
+    on:input={onInput}
+    bind:value
     {placeholder} />
   <div class="underline fixed" />
   <div class="underline reactive {focusClass}" />
