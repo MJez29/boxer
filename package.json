@@ -26,5 +26,9 @@
     "webpack-dev-server": "^3.10.3",
     "webpack-merge": "^4.2.2",
     "ws": "^7.2.1"
+  },
+  "dependencies": {
+    "svelte": "^3.18.2",
+    "svelte-loader": "^2.13.6"
   }
 }

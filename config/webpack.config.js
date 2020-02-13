@@ -6,7 +6,8 @@ const staticPath = path.join(__dirname, "..", "static");
 
 module.exports = {
   entry: {
-    background: "./src/background/index.ts"
+    background: "./src/background/index.ts",
+    options: "./src/options/index.js"
   },
   output: {
     filename: "[name].js",
@@ -18,11 +19,20 @@ module.exports = {
         test: /\.tsx?$/,
         use: "ts-loader",
         exclude: /node_modules/
+      },
+      {
+        test: /\.(html|svelte)$/,
+        use: {
+          loader: "svelte-loader"
+        }
       }
     ]
   },
   resolve: {
-    extensions: [".tsx", ".ts", ".js"]
+    extensions: [".mjs", ".tsx", ".ts", ".js", ".svelte"],
+    alias: {
+      svelte: path.resolve("node_modules", "svelte")
+    }
   },
   plugins: [new CopyPlugin([{ from: staticPath, to: buildPath }])]
 };
