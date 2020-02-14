@@ -1,4 +1,4 @@
-import { getSuggestions, getBestSuggestion } from "../lib/suggestions";
+import { getSuggestions, getDestinationUrl } from "../lib/suggestions";
 import { validateStorage, Alias, getAliases } from "../lib/storage";
 
 chrome.omnibox.setDefaultSuggestion({
@@ -17,10 +17,8 @@ chrome.omnibox.onInputChanged.addListener(async (input, suggest) => {
   suggest(getSuggestions(input, cachedAliases));
 });
 
-chrome.omnibox.onInputEntered.addListener((url, disposition) => {
-  if (!url.startsWith("http")) {
-    url = getBestSuggestion(url, []).content;
-  }
+chrome.omnibox.onInputEntered.addListener((input, disposition) => {
+  const url = getDestinationUrl(input, cachedAliases);
 
   switch (disposition) {
     case "currentTab":

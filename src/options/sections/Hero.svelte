@@ -9,7 +9,6 @@
   let link = "";
 
   async function onSave() {
-    alert("Saving");
     await saveAlias(name, link);
     alert("Alias saved!");
   }

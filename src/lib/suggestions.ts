@@ -32,3 +32,17 @@ export function getBestSuggestion(
   const index = options.findIndex(opt => matches(opt.content, input));
   return options[Math.max(index, 0)];
 }
+
+export function getDestinationUrl(input: string, aliases: Alias[]): string {
+  if (input === "") {
+    return chrome.extension.getURL("options.html");
+  }
+
+  for (const alias of aliases) {
+    if (input === alias.name) {
+      return alias.link;
+    }
+  }
+
+  return "wip";
+}
