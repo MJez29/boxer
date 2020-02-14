@@ -1,41 +1,27 @@
 <style>
-  .container {
-  }
-
   button {
-    border: none;
     outline: none;
-    background-color: lightgrey;
     padding: 15px 10px;
     text-align: center;
     min-width: 60px;
     position: relative;
+    background-color: lightgreen;
+    border: 5px solid lightgreen;
+    box-shadow: 5px 5px 0px lightgray;
+    cursor: pointer;
+    transition: box-shadow ease 0.2s, background-color ease 0.2s;
   }
 
-  .top {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 100%;
-    bottom: calc(100% - 2px);
-    background-color: grey;
+  button:hover,
+  button:focus {
+    box-shadow: 5px 5px 0px lightslategray;
   }
 
-  .right {
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
-
-  .bottom {
-  }
-
-  .left {
+  button:active {
+    background-color: white;
   }
 </style>
 
-<div class="container">
-  <button on:click>
-    <slot />
-  </button>
-</div>
+<button on:click>
+  <slot />
+</button>

@@ -20,6 +20,7 @@ export function getSuggestions(
   input: string,
   aliases: Alias[]
 ): chrome.omnibox.SuggestResult[] {
+  console.log(input, aliases);
   return aliases
     .filter(a => matches(a.name, input))
     .map(alias => aliasToSuggestResult(alias, input));

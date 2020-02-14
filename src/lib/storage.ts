@@ -48,12 +48,32 @@ export function saveAliases(aliases: Alias[]) {
   });
 }
 
+export function isAliasNameTaken(name: string, aliases: Alias[]) {
+  return aliases.some(alias => alias.name === name);
+}
+
+export function isAliasValid(name: string, link: string) {
+  return name.trim().length > 0 && link.trim().length > 0;
+}
+
 export async function saveAlias(name: string, link: string) {
+  name = name.trim();
+  link = link.trim();
+
   const aliases = await getAliases();
+  if (isAliasNameTaken(name, aliases)) {
+    throw new Error("Alias name is taken");
+  }
+
+  if (!isAliasValid(name, link)) {
+    throw new Error("Alias name and link cannot be empty");
+  }
+
   aliases.push({
     name,
     link
   });
+
   return saveAliases(aliases);
 }
 

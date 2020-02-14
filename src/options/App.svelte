@@ -5,11 +5,12 @@
 <style>
   :global(body) {
     margin: 0;
-    background-color: #b8d8d8;
+    font-size: 1em;
   }
 
   :global(*) {
     box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
   }
 </style>
 

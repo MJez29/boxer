@@ -24,51 +24,29 @@
 </script>
 
 <style>
-  .input {
+  input {
+    font-size: 1rem;
     border: none;
     outline: none;
-    background-color: lightgrey;
+    background-color: transparent;
     padding: 15px 10px;
+    display: block;
+    background-color: white;
+    border: 5px solid lightgreen;
+    box-shadow: 5px 5px 0px lightgray;
+    transition: box-shadow ease 0.2s;
   }
 
-  .underline {
-    position: absolute;
-    top: calc(100% - 2px);
-    bottom: 0;
-    left: 0;
-    content: "";
-  }
-
-  .fixed {
-    right: 0;
-    background-color: grey;
-  }
-
-  .reactive {
-    right: 100%;
-    background-color: lightsalmon;
-    transition: right ease-in 0.15s;
-  }
-
-  .reactive.focus {
-    right: 0;
-  }
-
-  .container {
-    position: relative;
-    display: inline-block;
-    background-color: lightgrey;
+  input:focus {
+    box-shadow: 5px 5px 0px lightslategray;
   }
 </style>
 
-<div class="container">
-  <input
-    class="input"
-    on:focus={onFocus}
-    on:blur={onBlur}
-    on:input={onInput}
-    bind:value
-    {placeholder} />
-  <div class="underline fixed" />
-  <div class="underline reactive {focusClass}" />
-</div>
+<input
+  class="input"
+  on:focus={onFocus}
+  on:blur={onBlur}
+  on:input={onInput}
+  bind:value
+  {placeholder}
+  aria-placeholder={placeholder} />

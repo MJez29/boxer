@@ -9,8 +9,14 @@
   let link = "";
 
   async function onSave() {
-    await saveAlias(name, link);
-    alert("Alias saved!");
+    try {
+      await saveAlias(name, link);
+      alert("Alias saved!");
+    } catch (e) {
+      if (e instanceof Error) {
+        alert(e.message);
+      }
+    }
   }
 </script>
 
@@ -28,11 +34,11 @@
   <div class="flex">
     <div class="f30">
       <Label>Name</Label>
-      <TextInput bind:value={name} />
+      <TextInput bind:value={name} placeholder="facebook" />
     </div>
     <div class="f30">
       <Label>Link</Label>
-      <TextInput bind:value={link} />
+      <TextInput bind:value={link} placeholder="https://facebook.com" />
     </div>
     <div>
       <Button on:click={onSave}>Save</Button>

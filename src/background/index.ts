@@ -7,13 +7,16 @@ chrome.omnibox.setDefaultSuggestion({
 
 let cachedAliases: Alias[] = [];
 
+// Fetch aliases on script load so that the cache is non-empty by the time they focus the omnibox
+getAliases().then(aliases => (cachedAliases = aliases));
+
 chrome.omnibox.onInputStarted.addListener(async () => {
+  // Refresh the cache. Note the cache won't be update by the time the first
+  // onInputChanged event is fired.
   cachedAliases = await getAliases();
-  console.log("onInputStarted", cachedAliases);
 });
 
 chrome.omnibox.onInputChanged.addListener(async (input, suggest) => {
-  console.log("onInputChanged", cachedAliases);
   suggest(getSuggestions(input, cachedAliases));
 });
 
