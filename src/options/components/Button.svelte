@@ -11,15 +11,6 @@
     cursor: pointer;
     transition: box-shadow ease 0.2s, background-color ease 0.2s;
   }
-
-  button:hover,
-  button:focus {
-    box-shadow: 5px 5px 0px lightslategray;
-  }
-
-  button:active {
-    background-color: white;
-  }
 </style>
 
 <button on:click>

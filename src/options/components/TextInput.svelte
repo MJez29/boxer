@@ -32,13 +32,14 @@
     padding: 15px 10px;
     display: block;
     background-color: white;
-    border: 5px solid lightgreen;
-    box-shadow: 5px 5px 0px lightgray;
-    transition: box-shadow ease 0.2s;
+    border: 1px solid #dc143c;
+    /* box-shadow: 5px 5px 0px lightgray; */
+    border-radius: 4px;
+    box-shadow: 0 0 5px #dc143c10;
   }
 
   input:focus {
-    box-shadow: 5px 5px 0px lightslategray;
+    border-width: 4px;
   }
 </style>
 
