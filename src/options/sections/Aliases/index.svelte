@@ -1,6 +1,7 @@
 <script>
   import { getAliases, deleteAlias } from "../../../lib/storage";
   import { onMount } from "svelte";
+  import { downloadAliases } from "../../../lib/download";
 
   let aliases = [];
 
@@ -18,6 +19,10 @@
   function onLaunch(alias) {
     window.location.href = alias.link;
   }
+
+  function onDownload() {
+    downloadAliases(aliases);
+  }
 </script>
 
 <style>
@@ -27,6 +32,7 @@
 </style>
 
 <h1>My Aliases</h1>
+<button on:click={onDownload}>Download</button>
 <table class="alias-table">
   <tbody>
     {#each aliases as alias}
