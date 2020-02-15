@@ -6,20 +6,25 @@
   "scripts": {
     "build": "webpack --config config/webpack.prod.js",
     "lint": "eslint --ext .js,.ts,.tsx src/ --fix",
-    "start": "webpack --config config/webpack.dev.js --watch"
+    "start": "webpack --config config/webpack.dev.js --watch",
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@types/chrome": "0.0.95",
+    "@types/jest": "^25.1.2",
     "@typescript-eslint/eslint-plugin": "^2.19.0",
     "@typescript-eslint/parser": "^2.19.0",
     "copy-webpack-plugin": "^5.1.1",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-jest": "^23.7.0",
     "eslint-plugin-prettier": "^3.1.2",
     "file-loader": "^5.0.2",
+    "jest": "^25.1.0",
     "prettier": "^1.19.1",
+    "ts-jest": "^25.2.0",
     "ts-loader": "^6.2.1",
     "typescript": "^3.7.5",
     "webpack": "^4.41.5",

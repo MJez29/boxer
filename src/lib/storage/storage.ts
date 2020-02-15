@@ -7,7 +7,7 @@ export interface Alias {
   link: string;
 }
 
-function isAlias(alias: unknown): alias is Alias {
+export function isAlias(alias: unknown): alias is Alias {
   return (
     typeof alias === "object" &&
     !!alias &&
@@ -16,7 +16,7 @@ function isAlias(alias: unknown): alias is Alias {
   );
 }
 
-function isAliasArray(aliases: unknown): aliases is Alias[] {
+export function isAliasArray(aliases: unknown): aliases is Alias[] {
   return Array.isArray(aliases) && aliases.every(isAlias);
 }
 
@@ -95,4 +95,14 @@ export function validateStorage(): Promise<void> {
   });
 
   return promise;
+}
+
+export async function deleteAlias(alias: Alias) {
+  const aliases = await getAliases();
+  const updatedAliases = aliases.filter(
+    ({ name, link }) => name !== alias.name || link !== alias.link
+  );
+  if (aliases.length !== updatedAliases.length) {
+    saveAliases(updatedAliases);
+  }
 }

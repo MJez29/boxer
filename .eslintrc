@@ -4,11 +4,13 @@
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "prettier/@typescript-eslint",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
+    "plugin:jest/style"
   ],
   "env": {
     "browser": true,
-    "es6": true
+    "es6": true,
+    "jest": true
   },
   "parserOptions": {
     "sourceType": "module",
@@ -19,7 +21,7 @@
     "indent": "off",
     "@typescript-eslint/explicit-function-return-type": "off"
   },
-  "plugins": ["@typescript-eslint"],
+  "plugins": ["jest", "@typescript-eslint"],
   "ignorePatterns": ["node_modules/", "config/", "static/"],
   "globals": {
     "chrome": true
