@@ -1,18 +1,33 @@
+<script>
+  export let transparent = false;
+</script>
+
 <style>
   button {
     outline: none;
-    padding: 15px 10px;
-    text-align: center;
-    min-width: 60px;
     position: relative;
-    background-color: lightgreen;
-    border: 5px solid lightgreen;
-    box-shadow: 5px 5px 0px lightgray;
     cursor: pointer;
-    transition: box-shadow ease 0.2s, background-color ease 0.2s;
+    border: none;
+    font-size: 16px;
+    min-width: 24px;
+    min-height: 24px;
+    border-radius: 4px;
+    color: inherit;
+  }
+
+  .transparent {
+    background-color: transparent;
+  }
+
+  .transparent:hover {
+    background-color: rgba(41, 4, 11, 0.1);
+  }
+
+  .transparent:active {
+    background-color: rgba(41, 4, 11, 0.2);
   }
 </style>
 
-<button on:click>
+<button on:click class:transparent>
   <slot />
 </button>

@@ -2,6 +2,9 @@
   import { getAliases, deleteAlias } from "../../../lib/storage";
   import { onMount } from "svelte";
   import { downloadAliases } from "../../../lib/download";
+  import Card from "../../components/Card";
+  import Icon from "../../components/Icon";
+  import Button from "../../components/Button";
 
   let aliases = [];
 
@@ -27,29 +30,52 @@
 
 <style>
   .alias-table {
-    border: 1px solid black;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  tr {
+    border-bottom: 2px solid rgba(41, 4, 11, 0.1);
+    height: 40px;
+  }
+
+  tr:first-of-type {
+    border-top: 2px solid rgba(41, 4, 11, 0.1);
+  }
+
+  td,
+  td * {
+    color: #dc143c;
   }
 </style>
 
-<h1>My Aliases</h1>
-<button on:click={onDownload}>Download</button>
-<table class="alias-table">
-  <tbody>
-    {#each aliases as alias}
-      <tr>
-        <td>
-          <span>{alias.name}</span>
-        </td>
-        <td>
-          <span>{alias.link}</span>
-        </td>
-        <td>
-          <button on:click={() => onLaunch(alias)}>Launch</button>
-        </td>
-        <td>
-          <button on:click={() => onDeleteAlias(alias)}>Delete</button>
-        </td>
-      </tr>
-    {/each}
-  </tbody>
-</table>
+<Card>
+  <h1>My Aliases</h1>
+  <button on:click={onDownload}>Download</button>
+  <table class="alias-table">
+    <tbody>
+      {#each aliases as alias}
+        <tr>
+          <td>
+            <span>{alias.name}</span>
+          </td>
+          <td>
+            <span>{alias.link}</span>
+          </td>
+          <td>
+            <Button transparent>
+              <a href={alias.link}>
+                <Icon name="external-link-alt" />
+              </a>
+            </Button>
+          </td>
+          <td>
+            <Button on:click={() => onDeleteAlias(alias)} transparent>
+              <Icon name="trash" />
+            </Button>
+          </td>
+        </tr>
+      {/each}
+    </tbody>
+  </table>
+</Card>

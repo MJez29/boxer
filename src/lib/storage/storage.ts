@@ -57,8 +57,8 @@ export function isAliasValid(name: string, link: string) {
 }
 
 export async function saveAlias(name: string, link: string) {
-  name = name.trim();
-  link = link.trim();
+  name = name.trim().toLowerCase();
+  link = link.trim().toLowerCase();
 
   const aliases = await getAliases();
   if (isAliasNameTaken(name, aliases)) {
