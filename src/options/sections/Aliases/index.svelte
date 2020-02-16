@@ -5,6 +5,7 @@
   import Card from "../../components/Card";
   import Icon from "../../components/Icon";
   import Button from "../../components/Button";
+  import FileUpload from "../../components/FileUpload";
 
   let aliases = [];
 
@@ -46,12 +47,20 @@
   td,
   td * {
     color: #dc143c;
+    outline: none;
   }
 </style>
 
 <Card>
   <h1>My Aliases</h1>
-  <button on:click={onDownload}>Download</button>
+  <Button on:click={onDownload} transparent>
+    <Icon name="download" />
+  </Button>
+  <FileUpload>
+    <Button transparent>
+      <Icon name="upload" />
+    </Button>
+  </FileUpload>
   <table class="alias-table">
     <tbody>
       {#each aliases as alias}
@@ -63,7 +72,7 @@
             <span>{alias.link}</span>
           </td>
           <td>
-            <Button transparent>
+            <Button transparent tabIndex={-1}>
               <a href={alias.link}>
                 <Icon name="external-link-alt" />
               </a>

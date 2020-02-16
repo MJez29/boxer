@@ -1,5 +1,6 @@
 <script>
   export let transparent = false;
+  export let tabIndex = 0;
 </script>
 
 <style>
@@ -17,9 +18,12 @@
 
   .transparent {
     background-color: transparent;
+    transition: background-color ease 0.2s;
   }
 
-  .transparent:hover {
+  .transparent:hover,
+  .transparent:focus,
+  .transparent:focus-within {
     background-color: rgba(41, 4, 11, 0.1);
   }
 
@@ -28,6 +32,6 @@
   }
 </style>
 
-<button on:click class:transparent>
+<button on:click class:transparent tabindex={tabIndex}>
   <slot />
 </button>
