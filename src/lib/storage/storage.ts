@@ -106,3 +106,13 @@ export async function deleteAlias(alias: Alias) {
     saveAliases(updatedAliases);
   }
 }
+
+export async function mergeAliases(newAliases: Alias[]) {
+  const existingAliases = await getAliases();
+  newAliases.forEach(n => {
+    if (!existingAliases.find(e => e.name === n.name)) {
+      existingAliases.push(n);
+    }
+  });
+  await saveAliases(existingAliases);
+}

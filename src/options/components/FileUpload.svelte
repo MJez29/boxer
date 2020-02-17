@@ -1,8 +1,10 @@
 <script>
+  export let accept = "";
+  export let multiple = false;
+
   let fileInput = null;
 
   function onClick() {
-    console.log("CLICK");
     if (fileInput) {
       fileInput.click();
     }
@@ -15,7 +17,7 @@
   }
 </style>
 
-<input type="file" bind:this={fileInput} />
+<input type="file" bind:this={fileInput} {accept} {multiple} on:input />
 <span on:click={onClick}>
   <slot />
 </span>

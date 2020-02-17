@@ -1,0 +1,16 @@
+{
+  "aliases": [
+    {
+      "name": "facebook",
+      "link": "https://facebook.com"
+    },
+    {
+      "name": "github",
+      "link": "https://github.com"
+    },
+    {
+      "name": "messenger",
+      "link": "https://messenger.com"
+    }
+  ]
+}

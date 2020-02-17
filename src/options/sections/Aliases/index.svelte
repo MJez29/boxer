@@ -6,6 +6,7 @@
   import Icon from "../../components/Icon";
   import Button from "../../components/Button";
   import FileUpload from "../../components/FileUpload";
+  import { importFiles } from "../../../lib/import";
 
   let aliases = [];
 
@@ -15,9 +16,9 @@
 
   onMount(refreshAliases);
 
-  function onDeleteAlias(alias) {
+  async function onDeleteAlias(alias) {
     deleteAlias(alias);
-    refreshAliases();
+    await refreshAliases();
   }
 
   function onLaunch(alias) {
@@ -26,6 +27,11 @@
 
   function onDownload() {
     downloadAliases(aliases);
+  }
+
+  async function onFileUpload(e) {
+    await importFiles(e.target.files);
+    await refreshAliases();
   }
 </script>
 
@@ -56,7 +62,7 @@
   <Button on:click={onDownload} transparent>
     <Icon name="download" />
   </Button>
-  <FileUpload>
+  <FileUpload multiple accept="application/json" on:input={onFileUpload}>
     <Button transparent>
       <Icon name="upload" />
     </Button>
