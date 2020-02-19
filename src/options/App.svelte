@@ -1,6 +1,8 @@
 <script>
   import Hero from "./sections/Hero";
   import Aliases from "./sections/Aliases";
+  import ToastPortal from "./sections/ToastPortal";
+  import Nav from "./sections/Nav";
 </script>
 
 <style>
@@ -16,6 +18,12 @@
   }
 </style>
 
-<Hero />
+<ToastPortal>
+  <Nav />
 
-<Aliases />
+  <!-- <Hero /> -->
+  <div class="content">
+    <Aliases />
+  </div>
+
+</ToastPortal>

@@ -33,7 +33,6 @@
     display: block;
     background-color: white;
     border: 1px solid #dc143c;
-    /* box-shadow: 5px 5px 0px lightgray; */
     border-radius: 4px;
     box-shadow: 0 0 5px #dc143c10;
   }

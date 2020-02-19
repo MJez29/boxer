@@ -1,6 +1,7 @@
 <script>
   export let transparent = false;
   export let tabIndex = 0;
+  export let ariaHidden = false;
 </script>
 
 <style>
@@ -14,6 +15,7 @@
     min-height: 24px;
     border-radius: 4px;
     color: inherit;
+    padding: 0;
   }
 
   .transparent {
@@ -32,6 +34,6 @@
   }
 </style>
 
-<button on:click class:transparent tabindex={tabIndex}>
+<button on:click class:transparent tabindex={tabIndex} aria-hidden={ariaHidden}>
   <slot />
 </button>
