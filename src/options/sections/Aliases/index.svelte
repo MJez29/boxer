@@ -44,7 +44,7 @@
   async function onDeleteAlias(alias) {
     await deleteAlias(alias);
     await refreshAliases();
-    displayToast(`Deleted alias ${alias.name} -> ${alias.link}`);
+    displayToast(`Deleted alias ${alias.name}`, "success");
   }
 
   function onLaunch(alias) {
@@ -62,6 +62,7 @@
   async function onFileUpload(e) {
     await importFiles(e.target.files);
     await refreshAliases();
+    displayToast("Successfully imported aliases", "success");
   }
 </script>
 

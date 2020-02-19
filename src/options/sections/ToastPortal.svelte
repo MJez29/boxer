@@ -3,6 +3,7 @@
   import { TOAST_KEY } from "../contexts";
   import { fly } from "svelte/transition";
   import { cubicOut } from "svelte/easing";
+  import Toast from "../components/Toast";
 
   let toasts = [];
 
@@ -11,9 +12,14 @@
     toasts = toasts.slice(1);
   };
 
-  const displayToast = text => {
-    toasts = [...toasts, text];
-    console.log(toasts);
+  const displayToast = (text, type) => {
+    toasts = [
+      ...toasts,
+      {
+        text,
+        type
+      }
+    ];
     setTimeout(popToast, 3000);
   };
 
@@ -35,8 +41,8 @@
 <style>
   .toast-container {
     position: fixed;
-    top: 0;
-    right: 0;
+    top: 40px;
+    right: 20px;
     display: flex;
     flex-direction: column;
   }
@@ -46,6 +52,6 @@
 
 <div class="toast-container">
   {#each toasts as toast, index (toast)}
-    <div transition:fly|local={{ x: 200, duration: 500 }}>{toast}</div>
+    <Toast type={toast.type}>{toast.text}</Toast>
   {/each}
 </div>
