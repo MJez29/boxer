@@ -57,6 +57,7 @@ export function isAliasValid(name: string, link: string) {
 }
 
 export async function saveAlias(name: string, link: string) {
+  console.log(name, link);
   name = name.trim().toLowerCase();
   link = link.trim().toLowerCase();
 
@@ -105,6 +106,12 @@ export async function deleteAlias(alias: Alias) {
   if (aliases.length !== updatedAliases.length) {
     saveAliases(updatedAliases);
   }
+}
+
+export async function replaceAlias(oldAlias: Alias, newAlias: Alias) {
+  console.log(newAlias);
+  await deleteAlias(oldAlias);
+  await saveAlias(newAlias.name, newAlias.link);
 }
 
 export async function mergeAliases(newAliases: Alias[]) {

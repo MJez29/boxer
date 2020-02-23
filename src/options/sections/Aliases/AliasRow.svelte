@@ -1,0 +1,150 @@
+<script>
+  import { createEventDispatcher, beforeUpdate } from "svelte";
+  import { getAliases, deleteAlias } from "../../../lib/storage";
+  import Card from "../../components/Card";
+  import Icon from "../../components/Icon";
+  import Button from "../../components/Button";
+  import FileUpload from "../../components/FileUpload";
+  import { importFiles } from "../../../lib/import";
+  import { getToastContext } from "../../contexts";
+  import Header from "../../components/Header";
+  import Checkbox from "../../components/Checkbox";
+  import TextInput from "../../components/TextInput";
+
+  export let name = "";
+  export let link = "";
+  export let selected = false;
+
+  let editedName = "";
+  let editedLink = "";
+
+  const dispatch = createEventDispatcher();
+
+  let editing = false;
+
+  const onDelete = () => {
+    dispatch("delete");
+  };
+
+  const onSelect = () => {
+    dispatch("select", !selected);
+  };
+
+  const onEdit = () => {
+    editing = true;
+    editedName = name;
+    editedLink = link;
+  };
+
+  const onNameInput = event => {
+    editedName = event.detail;
+  };
+
+  const onLinkInput = event => {
+    editedLink = event.detail;
+  };
+
+  const onCancel = () => {
+    editing = false;
+  };
+
+  const onSave = () => {
+    dispatch("alias", { name: editedName, link: editedLink });
+  };
+</script>
+
+<style>
+  .alias {
+    border-bottom: 2px solid rgba(41, 4, 11, 0.1);
+    height: 40px;
+    display: flex;
+    align-items: center;
+    color: #dc143c;
+  }
+
+  .alias:first-of-type {
+    border-top: 2px solid rgba(41, 4, 11, 0.1);
+  }
+
+  .alias a {
+    color: inherit;
+  }
+
+  .select {
+    flex: 0 0 40px;
+  }
+
+  .name {
+    flex: 1 1;
+  }
+
+  .editing {
+    height: 100%;
+  }
+
+  .ellipsis {
+    text-overflow: ellipsis;
+  }
+
+  .link {
+    flex: 2 1;
+  }
+
+  .right-icon {
+    flex: 0 0 40px;
+    text-align: right;
+  }
+</style>
+
+<div class="alias">
+  <div class="select">
+    {#if !editing}
+      <Checkbox value={selected} on:check={onSelect} />
+    {/if}
+  </div>
+  <div class="name" class:editing>
+    {#if editing}
+      <TextInput value={editedName} on:input={onNameInput} autoFocus />
+    {:else}
+      <div class="ellipsis">{name}</div>
+    {/if}
+  </div>
+  <div class="link" class:editing>
+    {#if editing}
+      <TextInput value={editedLink} on:input={onLinkInput} />
+    {:else}
+      <div class="ellipsis">{link}</div>
+    {/if}
+  </div>
+  <div class="right-icon">
+    {#if !editing}
+      <Button on:click={onEdit} transparent>
+        <Icon name="pencil-alt" />
+      </Button>
+    {/if}
+  </div>
+  <div class="right-icon">
+    {#if editing}
+      <Button transparent on:click={onSave}>
+        <Icon name="check" />
+      </Button>
+    {:else}
+      <Button transparent tabIndex={-1}>
+        <a href={link}>
+          <Icon name="external-link-alt" />
+        </a>
+      </Button>
+    {/if}
+  </div>
+  <div class="right-icon">
+    {#if editing}
+      <Button transparent on:click={onCancel}>
+        <Icon name="times" />
+      </Button>
+    {:else}
+      <Button on:click={onDelete} transparent>
+        <Icon name="trash" />
+      </Button>
+    {/if}
+  </div>
+</div>

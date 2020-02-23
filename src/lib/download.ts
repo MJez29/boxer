@@ -11,7 +11,7 @@ export function download(name: string, content: string) {
     el.download = name;
     document.body.appendChild(el);
     el.click();
-    document.removeChild(el);
+    document.body.removeChild(el);
     window.URL.revokeObjectURL(url);
   }
 }

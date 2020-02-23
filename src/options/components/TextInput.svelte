@@ -1,10 +1,13 @@
 <script>
-  import { createEventDispatcher } from "svelte";
+  import { createEventDispatcher, onMount } from "svelte";
 
   export let placeholder = "";
   export let value = "";
+  export let autoFocus = false;
 
   let focused = false;
+
+  let inputEl = null;
 
   const dispatch = createEventDispatcher();
 
@@ -20,6 +23,12 @@
     dispatch("input", event.target.value);
   }
 
+  onMount(() => {
+    if (inputEl && autoFocus) {
+      inputEl.focus();
+    }
+  });
+
   $: focusClass = focused ? "focus" : "";
 </script>
 
@@ -29,24 +38,44 @@
     border: none;
     outline: none;
     background-color: transparent;
-    padding: 15px 10px;
     display: block;
-    background-color: white;
-    border: 1px solid #dc143c;
-    border-radius: 4px;
-    box-shadow: 0 0 5px #dc143c10;
+    width: 100%;
   }
 
   input:focus {
     border-width: 4px;
   }
+
+  .container {
+    position: relative;
+    height: 100%;
+    display: flex;
+  }
+
+  .container::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    bottom: -2px;
+    left: 0;
+    right: 100%;
+    background-color: green;
+    transition: right ease 0.2s;
+  }
+
+  .container.focused::after {
+    right: 0;
+  }
 </style>
 
-<input
-  class="input"
-  on:focus={onFocus}
-  on:blur={onBlur}
-  on:input={onInput}
-  bind:value
-  {placeholder}
-  aria-placeholder={placeholder} />
+<div class="container" class:focused>
+  <input
+    class="input"
+    bind:this={inputEl}
+    on:focus={onFocus}
+    on:blur={onBlur}
+    on:input={onInput}
+    {value}
+    {placeholder}
+    aria-placeholder={placeholder} />
+</div>

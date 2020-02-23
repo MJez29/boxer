@@ -3,7 +3,6 @@
   import { fly } from "svelte/transition";
 
   export let type = "";
-  export let message = "";
 
   $: success = type === "success";
   $: error = type === "error";

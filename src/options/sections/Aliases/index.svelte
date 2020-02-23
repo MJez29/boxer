@@ -1,5 +1,5 @@
 <script>
-  import { getAliases, deleteAlias } from "../../../lib/storage";
+  import { getAliases, deleteAlias, replaceAlias } from "../../../lib/storage";
   import { onMount } from "svelte";
   import { downloadAliases } from "../../../lib/download";
   import Card from "../../components/Card";
@@ -10,6 +10,7 @@
   import { getToastContext } from "../../contexts";
   import Header from "../../components/Header";
   import Checkbox from "../../components/Checkbox";
+  import AliasRow from "./AliasRow";
 
   const { displayToast } = getToastContext();
 
@@ -17,27 +18,34 @@
 
   const selectedAliases = new Set();
 
-  const onCheck = alias => {
-    if (selectedAliases.has(alias)) {
-      selectedAliases.delete(alias);
+  async function refreshAliases() {
+    aliases = await getAliases();
+  }
+
+  const onSelectAlias = alias => {
+    if (selectedAliases.has(alias.name)) {
+      selectedAliases.delete(alias.name);
     } else {
-      selectedAliases.add(alias);
+      selectedAliases.add(alias.name);
     }
     selectedAliases = selectedAliases;
+    aliases = aliases;
   };
 
   const onCheckAll = () => {
     if (selectedAliases.size === aliases.length) {
       selectedAliases.clear();
     } else {
-      aliases.forEach(alias => selectedAliases.add(alias));
+      aliases.forEach(alias => selectedAliases.add(alias.name));
     }
     selectedAliases = selectedAliases;
+    aliases = aliases;
   };
 
-  async function refreshAliases() {
-    aliases = await getAliases();
-  }
+  const onNewAlias = async (oldAlias, newAlias) => {
+    await replaceAlias(oldAlias, newAlias);
+    refreshAliases();
+  };
 
   onMount(refreshAliases);
 
@@ -47,22 +55,23 @@
     displayToast(`Deleted alias ${alias.name}`, "success");
   }
 
-  function onLaunch(alias) {
-    window.location.href = alias.link;
-  }
-
   function onDownload() {
     if (selectedAliases.size > 0) {
       downloadAliases([...selectedAliases]);
     } else {
       downloadAliases(aliases);
     }
+    displayToast("Download complete", "success");
   }
 
   async function onFileUpload(e) {
     await importFiles(e.target.files);
     await refreshAliases();
     displayToast("Successfully imported aliases", "success");
+  }
+
+  function isAliasSelected(alias) {
+    return selectedAliases.has(alias.name);
   }
 </script>
 
@@ -136,32 +145,14 @@
     </div>
   </div>
   <div class="aliases">
-    {#each aliases as alias}
-      <div class="alias">
-        <div class="select">
-          <Checkbox
-            value={selectedAliases.has(alias)}
-            on:check={() => onCheck(alias)} />
-        </div>
-        <div class="name">
-          <span>{alias.name}</span>
-        </div>
-        <div class="link">
-          <span>{alias.link}</span>
-        </div>
-        <div class="right-icon">
-          <Button transparent tabIndex={-1}>
-            <a href={alias.link}>
-              <Icon name="external-link-alt" />
-            </a>
-          </Button>
-        </div>
-        <div class="right-icon">
-          <Button on:click={() => onDeleteAlias(alias)} transparent>
-            <Icon name="trash" />
-          </Button>
-        </div>
-      </div>
+    {#each aliases as alias (alias)}
+      <AliasRow
+        name={alias.name}
+        link={alias.link}
+        selected={isAliasSelected(alias)}
+        on:alias={newAliasEvent => onNewAlias(alias, newAliasEvent.detail)}
+        on:delete={() => onDeleteAlias(alias)}
+        on:select={() => onSelectAlias(alias)} />
     {/each}
   </div>
 </Card>
