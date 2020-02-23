@@ -11,8 +11,8 @@
   import Checkbox from "../../components/Checkbox";
   import TextInput from "../../components/TextInput";
 
-  export let name = "";
-  export let link = "";
+  export let name;
+  export let link;
   export let selected = false;
 
   let editedName = "";
@@ -20,7 +20,7 @@
 
   const dispatch = createEventDispatcher();
 
-  let editing = false;
+  let editing = name === undefined && link === undefined;
 
   const onDelete = () => {
     dispatch("delete");
@@ -45,11 +45,18 @@
   };
 
   const onCancel = () => {
-    editing = false;
+    if (name !== undefined && link !== undefined) {
+      editing = false;
+    } else {
+      editedLink = "";
+      editedName = "";
+    }
   };
 
   const onSave = () => {
     dispatch("alias", { name: editedName, link: editedLink });
+    editedName = "";
+    editedLink = "";
   };
 </script>
 
@@ -75,7 +82,7 @@
   }
 
   .name {
-    flex: 1 1;
+    width: calc(calc(100% - 160px) * 0.33333);
   }
 
   .editing {
@@ -84,10 +91,11 @@
 
   .ellipsis {
     text-overflow: ellipsis;
+    overflow: hidden;
   }
 
   .link {
-    flex: 2 1;
+    width: calc(calc(100% - 160px) * 0.66667);
   }
 
   .right-icon {
@@ -104,14 +112,21 @@
   </div>
   <div class="name" class:editing>
     {#if editing}
-      <TextInput value={editedName} on:input={onNameInput} autoFocus />
+      <TextInput
+        value={editedName}
+        on:input={onNameInput}
+        autoFocus
+        placeholder="Enter a name" />
     {:else}
       <div class="ellipsis">{name}</div>
     {/if}
   </div>
   <div class="link" class:editing>
     {#if editing}
-      <TextInput value={editedLink} on:input={onLinkInput} />
+      <TextInput
+        value={editedLink}
+        on:input={onLinkInput}
+        placeholder="Enter a link" />
     {:else}
       <div class="ellipsis">{link}</div>
     {/if}

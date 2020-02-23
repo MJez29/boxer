@@ -1,5 +1,10 @@
 <script>
-  import { getAliases, deleteAlias, replaceAlias } from "../../../lib/storage";
+  import {
+    getAliases,
+    deleteAlias,
+    replaceAlias,
+    saveAlias
+  } from "../../../lib/storage";
   import { onMount } from "svelte";
   import { downloadAliases } from "../../../lib/download";
   import Card from "../../components/Card";
@@ -43,13 +48,18 @@
   };
 
   const onNewAlias = async (oldAlias, newAlias) => {
-    await replaceAlias(oldAlias, newAlias);
+    if (oldAlias) {
+      await replaceAlias(oldAlias, newAlias);
+    } else {
+      await saveAlias(newAlias.name, newAlias.link);
+    }
     refreshAliases();
   };
 
   onMount(refreshAliases);
 
   async function onDeleteAlias(alias) {
+    selectedAliases.delete(alias.name);
     await deleteAlias(alias);
     await refreshAliases();
     displayToast(`Deleted alias ${alias.name}`, "success");
@@ -85,22 +95,6 @@
   .aliases {
     display: flex;
     flex-direction: column;
-  }
-
-  .alias {
-    border-bottom: 2px solid rgba(41, 4, 11, 0.1);
-    height: 40px;
-    display: flex;
-    align-items: center;
-    color: #dc143c;
-  }
-
-  .alias:first-of-type {
-    border-top: 2px solid rgba(41, 4, 11, 0.1);
-  }
-
-  .alias a {
-    color: inherit;
   }
 
   .select {
@@ -154,5 +148,7 @@
         on:delete={() => onDeleteAlias(alias)}
         on:select={() => onSelectAlias(alias)} />
     {/each}
+    <AliasRow
+      on:alias={newAliasEvent => onNewAlias(null, newAliasEvent.detail)} />
   </div>
 </Card>
