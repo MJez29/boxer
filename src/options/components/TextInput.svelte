@@ -4,6 +4,7 @@
   export let placeholder = "";
   export let value = "";
   export let autoFocus = false;
+  export let embed = false;
 
   let focused = false;
 
@@ -40,6 +41,11 @@
     background-color: transparent;
     display: block;
     width: 100%;
+    padding-bottom: 10px;
+  }
+
+  input.embed {
+    padding: 0;
   }
 
   input:focus {
@@ -50,6 +56,11 @@
     position: relative;
     height: 100%;
     display: flex;
+    border-bottom: 2px solid rgba(41, 4, 11, 0.2);
+  }
+
+  .container.embed {
+    border-bottom: none;
   }
 
   .container::after {
@@ -59,7 +70,7 @@
     bottom: -2px;
     left: 0;
     right: 100%;
-    background-color: green;
+    background-color: #dc143c;
     transition: right ease 0.2s;
   }
 
@@ -68,9 +79,10 @@
   }
 </style>
 
-<div class="container" class:focused>
+<div class="container" class:focused class:embed>
   <input
     class="input"
+    class:embed
     bind:this={inputEl}
     on:focus={onFocus}
     on:blur={onBlur}

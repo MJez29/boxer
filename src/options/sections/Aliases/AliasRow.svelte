@@ -55,6 +55,9 @@
 
   const onSave = () => {
     dispatch("alias", { name: editedName, link: editedLink });
+    if (name !== undefined && link !== undefined) {
+      editing = false;
+    }
     editedName = "";
     editedLink = "";
   };
@@ -70,7 +73,7 @@
   }
 
   .alias:first-of-type {
-    border-top: 2px solid rgba(41, 4, 11, 0.1);
+    border-top: 2px solid rgba(41, 4, 11, 0.2);
   }
 
   .alias a {
@@ -113,6 +116,7 @@
   <div class="name" class:editing>
     {#if editing}
       <TextInput
+        embed
         value={editedName}
         on:input={onNameInput}
         autoFocus
@@ -124,6 +128,7 @@
   <div class="link" class:editing>
     {#if editing}
       <TextInput
+        embed
         value={editedLink}
         on:input={onLinkInput}
         placeholder="Enter a link" />

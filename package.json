@@ -35,6 +35,7 @@
   },
   "dependencies": {
     "svelte": "^3.18.2",
-    "svelte-loader": "^2.13.6"
+    "svelte-loader": "^2.13.6",
+    "svelte-routing": "^1.4.0"
   }
 }

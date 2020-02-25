@@ -3,7 +3,8 @@
     getAliases,
     deleteAlias,
     replaceAlias,
-    saveAlias
+    saveAlias,
+    searchAliases
   } from "../../../lib/storage";
   import { onMount } from "svelte";
   import { downloadAliases } from "../../../lib/download";
@@ -15,16 +16,33 @@
   import { getToastContext } from "../../contexts";
   import Header from "../../components/Header";
   import Checkbox from "../../components/Checkbox";
+  import Hr from "../../components/Hr";
   import AliasRow from "./AliasRow";
+  import TextInput from "../../components/TextInput";
+  import Label from "../../components/Label";
 
   const { displayToast } = getToastContext();
 
   let aliases = [];
 
-  const selectedAliases = new Set();
+  let filterBy = "";
+
+  let selectedAliases = new Set();
 
   async function refreshAliases() {
-    aliases = await getAliases();
+    if (filterBy.length > 0) {
+      aliases = await searchAliases(filterBy);
+    } else {
+      aliases = await getAliases();
+    }
+
+    const newSelectedAliases = new Set();
+    aliases.forEach(alias => {
+      if (selectedAliases.has(alias.name)) {
+        newSelectedAliases.add(alias.name);
+      }
+    });
+    selectedAliases = newSelectedAliases;
   }
 
   const onSelectAlias = alias => {
@@ -83,6 +101,11 @@
   function isAliasSelected(alias) {
     return selectedAliases.has(alias.name);
   }
+
+  function onFilterInput(event) {
+    filterBy = event.detail;
+    refreshAliases();
+  }
 </script>
 
 <style>
@@ -113,42 +136,48 @@
     flex: 0 0 40px;
     text-align: right;
   }
+
+  .filters {
+    margin-bottom: 100px;
+    width: 50%;
+  }
 </style>
 
-<Card>
-  <Header>My Aliases</Header>
-  <div class="aliases-header">
-    <div class="select">
-      <Checkbox
-        value={selectedAliases.size === aliases.length}
-        on:check={onCheckAll} />
-    </div>
-    <div class="name">Name</div>
-    <div class="link">Link</div>
-    <div class="right-icon">
-      <Button on:click={onDownload} transparent>
-        <Icon name="download" />
+<div class="filters">
+  <Label>Filter by</Label>
+  <TextInput placeholder="Ex. foobar" on:input={onFilterInput} />
+</div>
+<div class="aliases-header">
+  <div class="select">
+    <Checkbox
+      value={selectedAliases.size === aliases.length}
+      on:check={onCheckAll} />
+  </div>
+  <div class="name">Name</div>
+  <div class="link">Link</div>
+  <div class="right-icon">
+    <Button on:click={onDownload} transparent>
+      <Icon name="download" />
+    </Button>
+  </div>
+  <div class="right-icon">
+    <FileUpload multiple accept="application/json" on:input={onFileUpload}>
+      <Button transparent>
+        <Icon name="upload" />
       </Button>
-    </div>
-    <div class="right-icon">
-      <FileUpload multiple accept="application/json" on:input={onFileUpload}>
-        <Button transparent>
-          <Icon name="upload" />
-        </Button>
-      </FileUpload>
-    </div>
+    </FileUpload>
   </div>
-  <div class="aliases">
-    {#each aliases as alias (alias)}
-      <AliasRow
-        name={alias.name}
-        link={alias.link}
-        selected={isAliasSelected(alias)}
-        on:alias={newAliasEvent => onNewAlias(alias, newAliasEvent.detail)}
-        on:delete={() => onDeleteAlias(alias)}
-        on:select={() => onSelectAlias(alias)} />
-    {/each}
+</div>
+<div class="aliases">
+  {#each aliases as alias (alias.name)}
     <AliasRow
-      on:alias={newAliasEvent => onNewAlias(null, newAliasEvent.detail)} />
-  </div>
-</Card>
+      name={alias.name}
+      link={alias.link}
+      selected={isAliasSelected(alias)}
+      on:alias={newAliasEvent => onNewAlias(alias, newAliasEvent.detail)}
+      on:delete={() => onDeleteAlias(alias)}
+      on:select={() => onSelectAlias(alias)} />
+  {/each}
+  <AliasRow
+    on:alias={newAliasEvent => onNewAlias(null, newAliasEvent.detail)} />
+</div>

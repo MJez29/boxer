@@ -4,10 +4,9 @@
 
 <style>
   label {
-    font-size: 1rem;
-    margin-left: 15px;
-    margin-bottom: 6px;
+    font-size: 0.75rem;
     display: block;
+    margin-bottom: 10px;
   }
 </style>
 

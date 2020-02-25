@@ -123,3 +123,11 @@ export async function mergeAliases(newAliases: Alias[]) {
   });
   await saveAliases(existingAliases);
 }
+
+export async function searchAliases(query: string) {
+  query = query.trim().toLowerCase();
+  const aliases = await getAliases();
+  return aliases.filter(
+    ({ name, link }) => name.includes(query) || link.includes(query)
+  );
+}
