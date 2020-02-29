@@ -17,7 +17,7 @@
   },
   "permissions": ["storage"],
   "options_ui": {
-    "page": "options.html",
+    "page": "aliases.html",
     "open_in_tab": true
   }
 }

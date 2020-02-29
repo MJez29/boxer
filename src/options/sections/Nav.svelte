@@ -1,3 +1,7 @@
+<script>
+  import NavLink from "../components/NavLink";
+</script>
+
 <style>
   nav {
     position: fixed;
@@ -10,15 +14,9 @@
     z-index: 10;
     padding-top: 100px;
   }
-
-  .nav-element {
-    background-color: rgba(0, 0, 0, 0.2);
-    margin-bottom: 20px;
-    padding: 10px 0 10px 20px;
-  }
 </style>
 
 <nav>
-  <div class="nav-element">Aliases</div>
-  <div class="nav-element">About</div>
+  <NavLink name="aliases">Aliases</NavLink>
+  <NavLink name="about">About</NavLink>
 </nav>

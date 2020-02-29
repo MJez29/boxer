@@ -3,7 +3,7 @@
   import About from "./sections/About";
   import ToastPortal from "./sections/ToastPortal";
   import Nav from "./sections/Nav";
-  import { Router, Route } from "svelte-routing";
+  import Route from "./components/Route";
 </script>
 
 <style>
@@ -25,15 +25,14 @@
   }
 </style>
 
-<Router>
-  <ToastPortal>
-    <Nav />
+<ToastPortal>
+  <Nav />
 
-    <!-- <Hero /> -->
-    <div class="content">
-      <Route path="options.html" component={Aliases} />
-      <Route path="about.html" component={About} />
-    </div>
+  <!-- <Hero /> -->
+  <div class="content">
+    <Route component={Aliases} />
+    <Route name="aliases" component={Aliases} />
+    <Route name="about" component={About} />
+  </div>
 
-  </ToastPortal>
-</Router>
+</ToastPortal>
