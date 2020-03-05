@@ -4,7 +4,9 @@
     deleteAlias,
     replaceAlias,
     saveAlias,
-    searchAliases
+    searchAliases,
+    deleteAllAliases,
+    deleteAliases
   } from "../../../lib/storage";
   import { onMount } from "svelte";
   import { downloadAliases } from "../../../lib/download";
@@ -106,12 +108,25 @@
     filterBy = event.detail;
     refreshAliases();
   }
+
+  async function onDelete() {
+    if (selectedAliases.size === 0) {
+      await deleteAllAliases();
+    } else {
+      const aliasesToDelete = aliases.filter(alias =>
+        selectedAliases.has(alias.name)
+      );
+      await deleteAliases(aliasesToDelete);
+    }
+    await refreshAliases();
+  }
 </script>
 
 <style>
   .aliases-header {
     display: flex;
     flex-direction: row;
+    align-items: center;
     color: #750b20;
   }
 
@@ -121,15 +136,15 @@
   }
 
   .select {
-    flex: 0 0 40px;
+    width: 40px;
   }
 
   .name {
-    flex: 1 1;
+    width: calc(calc(100% - 160px) * 0.33333);
   }
 
   .link {
-    flex: 2 1;
+    width: calc(calc(100% - 160px) * 0.66667);
   }
 
   .right-icon {
@@ -166,6 +181,11 @@
         <Icon name="upload" />
       </Button>
     </FileUpload>
+  </div>
+  <div class="right-icon">
+    <Button on:click={onDelete} transparent>
+      <Icon name="trash" />
+    </Button>
   </div>
 </div>
 <div class="aliases">

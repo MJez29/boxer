@@ -7,6 +7,10 @@ export interface Alias {
   link: string;
 }
 
+export function areAliasesEqual(a1: Alias, a2: Alias) {
+  return a1.name === a2.name && a1.link === a2.link;
+}
+
 export function isAlias(alias: unknown): alias is Alias {
   return (
     typeof alias === "object" &&
@@ -109,7 +113,6 @@ export async function deleteAlias(alias: Alias) {
 }
 
 export async function replaceAlias(oldAlias: Alias, newAlias: Alias) {
-  console.log(newAlias);
   await deleteAlias(oldAlias);
   await saveAlias(newAlias.name, newAlias.link);
 }
@@ -130,4 +133,20 @@ export async function searchAliases(query: string) {
   return aliases.filter(
     ({ name, link }) => name.includes(query) || link.includes(query)
   );
+}
+
+export async function deleteAliases(aliasesToDelete: Alias[]) {
+  const aliases = await getAliases();
+  const newAliases = aliases.filter(
+    alias =>
+      !aliasesToDelete.find(aliasToDelete =>
+        areAliasesEqual(alias, aliasToDelete)
+      )
+  );
+
+  return await saveAliases(newAliases);
+}
+
+export async function deleteAllAliases() {
+  return await saveAliases([]);
 }
