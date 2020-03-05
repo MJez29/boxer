@@ -34,6 +34,7 @@
     "ws": "^7.2.1"
   },
   "dependencies": {
+    "fuse.js": "^3.4.6",
     "svelte": "^3.18.2",
     "svelte-loader": "^2.13.6"
   }

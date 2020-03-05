@@ -1,4 +1,5 @@
 import { Alias } from "./storage";
+import * as Fuse from "fuse.js";
 
 function matches(full: string, search: string) {
   return full.startsWith(search);
@@ -10,8 +11,9 @@ function aliasToSuggestResult(
 ): chrome.omnibox.SuggestResult {
   return {
     content: name,
-    description: `<match>${input}</match>${name.substr(
-      input.length
+    description: `${name.replace(
+      new RegExp(input),
+      "<match>$&</match>"
     )} - <url>${link}</url>`
   };
 }
@@ -20,10 +22,11 @@ export function getSuggestions(
   input: string,
   aliases: Alias[]
 ): chrome.omnibox.SuggestResult[] {
-  console.log(input, aliases);
-  return aliases
-    .filter(a => matches(a.name, input))
-    .map(alias => aliasToSuggestResult(alias, input));
+  const fuse = new Fuse(aliases, {
+    keys: ["name", "link"]
+  });
+
+  return fuse.search(input).map(alias => aliasToSuggestResult(alias, input));
 }
 
 export function getBestSuggestion(
@@ -39,10 +42,15 @@ export function getDestinationUrl(input: string, aliases: Alias[]): string {
     return chrome.extension.getURL("options.html");
   }
 
-  for (const alias of aliases) {
-    if (input === alias.name) {
-      return alias.link;
-    }
+  const fuse = new Fuse(aliases, {
+    keys: ["name", "link"]
+  });
+
+  const results = fuse.search(input);
+
+  if (results.length > 0) {
+    console.log(results);
+    return results[0].link;
   }
 
   return "wip";
