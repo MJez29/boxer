@@ -1,7 +1,13 @@
 import { writable } from "svelte/store";
 
 function createRouter() {
-  const { subscribe, set } = writable("");
+  let defaultPath = "";
+  const match = window.location.search.match(/path=([\w]*)/);
+  if (match) {
+    defaultPath = match[1];
+  }
+
+  const { subscribe, set } = writable(defaultPath);
 
   const goTo = (newPath: string) => {
     history.pushState(null, "", `?path=${newPath}`);
