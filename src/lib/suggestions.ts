@@ -53,5 +53,5 @@ export function getDestinationUrl(input: string, aliases: Alias[]): string {
     return results[0].link;
   }
 
-  return "wip";
+  return chrome.extension.getURL("options.html");
 }
