@@ -1,6 +1,5 @@
 <script>
-  import Header from "../components/Header";
-  import Code from "../components/Code";
+  import { Code, Header } from "@lib/components";
 </script>
 
 <Header>Boxer</Header>

@@ -3,7 +3,7 @@
   import { TOAST_KEY } from "../contexts";
   import { fly } from "svelte/transition";
   import { cubicOut } from "svelte/easing";
-  import Toast from "../components/Toast";
+  import Toast from "@lib/components/Toast";
 
   let toasts = [];
 

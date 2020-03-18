@@ -1,15 +1,17 @@
 <script>
   import { createEventDispatcher, beforeUpdate } from "svelte";
-  import { getAliases, deleteAlias } from "../../../lib/storage";
-  import Card from "../../components/Card";
-  import Icon from "../../components/Icon";
-  import Button from "../../components/Button";
-  import FileUpload from "../../components/FileUpload";
-  import { importFiles } from "../../../lib/import";
+  import { getAliases, deleteAlias } from "@lib/storage";
+  import { importFiles } from "@lib/import";
   import { getToastContext } from "../../contexts";
-  import Header from "../../components/Header";
-  import Checkbox from "../../components/Checkbox";
-  import TextInput from "../../components/TextInput";
+  import {
+    Card,
+    Icon,
+    Button,
+    FileUpload,
+    Header,
+    Checkbox,
+    TextInput
+  } from "@lib/components";
 
   export let name;
   export let link;

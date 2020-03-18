@@ -52,7 +52,7 @@
   }
 
   .bg.active {
-    right: calc(50%);
+    right: calc(100% - 10px);
   }
 
   .bg.animate {

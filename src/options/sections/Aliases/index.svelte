@@ -7,21 +7,23 @@
     searchAliases,
     deleteAllAliases,
     deleteAliases
-  } from "../../../lib/storage";
+  } from "@lib/storage";
   import { onMount } from "svelte";
-  import { downloadAliases } from "../../../lib/download";
-  import Card from "../../components/Card";
-  import Icon from "../../components/Icon";
-  import Button from "../../components/Button";
-  import FileUpload from "../../components/FileUpload";
-  import { importFiles } from "../../../lib/import";
+  import { downloadAliases } from "@lib/download";
+  import { importFiles } from "@lib/import";
   import { getToastContext } from "../../contexts";
-  import Header from "../../components/Header";
-  import Checkbox from "../../components/Checkbox";
-  import Hr from "../../components/Hr";
   import AliasRow from "./AliasRow";
-  import TextInput from "../../components/TextInput";
-  import Label from "../../components/Label";
+  import {
+    Card,
+    Icon,
+    Button,
+    FileUpload,
+    Header,
+    Checkbox,
+    Hr,
+    TextInput,
+    Label
+  } from "@lib/components";
 
   const { displayToast } = getToastContext();
 
