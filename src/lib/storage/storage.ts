@@ -1,28 +1,8 @@
+import { Alias, isAlias, isAliasArray, areAliasesEqual } from "@lib/aliases";
+
 const ALIAS_STORE_KEY = "aliases";
 const SCHEMA_VERSION_KEY = "version";
 const SCHEMA_VERSION = "1";
-
-export interface Alias {
-  name: string;
-  link: string;
-}
-
-export function areAliasesEqual(a1: Alias, a2: Alias) {
-  return a1.name === a2.name && a1.link === a2.link;
-}
-
-export function isAlias(alias: unknown): alias is Alias {
-  return (
-    typeof alias === "object" &&
-    !!alias &&
-    typeof (alias as Alias)["name"] === "string" &&
-    typeof (alias as Alias)["link"] === "string"
-  );
-}
-
-export function isAliasArray(aliases: unknown): aliases is Alias[] {
-  return Array.isArray(aliases) && aliases.every(isAlias);
-}
 
 export function getAliases(): Promise<Alias[]> {
   const promise = new Promise<Alias[]>((resolve, reject) => {

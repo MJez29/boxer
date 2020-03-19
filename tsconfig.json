@@ -4,12 +4,11 @@
     "target": "es5",
     "lib": ["es6", "dom"],
     "baseUrl": "src",
-    "rootDir": "src",
     "paths": {
       // Keep up to date with webpack.config.js
-      "@lib": ["lib"],
-      "@options": ["options"],
-      "@popup": ["popup"]
+      "@lib/*": ["lib/*"],
+      "@options/*": ["options/*"],
+      "@popup/*": ["popup/*"]
     }
   }
 }

@@ -1,4 +1,4 @@
-import { Alias } from "./storage";
+import { Alias } from "./aliases";
 import * as Fuse from "fuse.js";
 
 function matches(full: string, search: string) {

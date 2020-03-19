@@ -1,4 +1,4 @@
-import { Alias } from "./storage";
+import { Alias } from "./aliases";
 
 export function download(name: string, content: string) {
   const blob = new Blob([content], { type: "text/json" });

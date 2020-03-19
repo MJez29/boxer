@@ -1,5 +1,6 @@
-import { getSuggestions, getDestinationUrl } from "../lib/suggestions";
-import { validateStorage, Alias, getAliases } from "../lib/storage";
+import { getSuggestions, getDestinationUrl } from "@lib/suggestions";
+import { validateStorage, getAliases } from "@lib/storage";
+import { Alias } from "@lib/aliases";
 
 chrome.omnibox.setDefaultSuggestion({
   description: "Boxer"

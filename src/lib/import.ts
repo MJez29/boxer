@@ -1,4 +1,5 @@
-import { Alias, isAliasArray, mergeAliases } from "./storage";
+import { mergeAliases } from "./storage";
+import { Alias, isAliasArray } from "@lib/aliases";
 
 export function readFile(file: File): Promise<string> {
   return new Promise((res, rej) => {

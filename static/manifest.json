@@ -15,7 +15,7 @@
     "persistent": false,
     "scripts": ["background.js"]
   },
-  "permissions": ["storage"],
+  "permissions": ["storage", "tabs"],
   "options_ui": {
     "page": "aliases.html",
     "open_in_tab": true

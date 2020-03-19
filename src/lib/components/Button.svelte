@@ -2,6 +2,9 @@
   export let transparent = false;
   export let tabIndex = 0;
   export let ariaHidden = false;
+  export let fullWidth = false;
+  export let primary = false;
+  export let padded = false;
 </script>
 
 <style>
@@ -16,6 +19,29 @@
     border-radius: 4px;
     color: inherit;
     padding: 0;
+  }
+
+  button.fullWidth {
+    width: 100%;
+  }
+
+  button.primary {
+    background-color: #dc143c;
+    color: #f5f5f5;
+  }
+
+  button.primary:hover,
+  button.primary:focus,
+  button.primary:focus-within {
+    background-color: #c61136;
+  }
+
+  button.primary:active {
+    background-color: #b00f30;
+  }
+
+  button.padded {
+    padding: 10px 15px;
   }
 
   .transparent {
@@ -34,6 +60,13 @@
   }
 </style>
 
-<button on:click class:transparent tabindex={tabIndex} aria-hidden={ariaHidden}>
+<button
+  on:click
+  class:transparent
+  tabindex={tabIndex}
+  aria-hidden={ariaHidden}
+  class:fullWidth
+  class:primary
+  class:padded>
   <slot />
 </button>
