@@ -20,9 +20,9 @@ export function isAliasArray(aliases: unknown): aliases is Alias[] {
   return Array.isArray(aliases) && aliases.every(isAlias);
 }
 
-function format(s: string) {
+export function formatAsName(s: string) {
   let name = s
-    .replace(/-|_|\|/g, " ")
+    .replace(/-|_|\||\//g, " ")
     .replace(/ ( )+/g, " ")
     .toLowerCase()
     .trim();
@@ -30,13 +30,22 @@ function format(s: string) {
   const splitSet = new Set(name.split(" "));
   name = "";
   splitSet.forEach(value => {
-    name += value + " ";
+    value = value.trim();
+    if (value.length > 0) {
+      name += value + " ";
+    }
   });
 
   return name.trim();
 }
 
-export function getNameSuggestion({ url: urlString, title }: chrome.tabs.Tab) {
+export function getNameSuggestion({
+  url: urlString,
+  title
+}: {
+  url?: string;
+  title?: string;
+}) {
   if (!urlString || !title) {
     return "";
   }
@@ -55,5 +64,5 @@ export function getNameSuggestion({ url: urlString, title }: chrome.tabs.Tab) {
 
   name += title;
 
-  return format(name);
+  return formatAsName(name);
 }

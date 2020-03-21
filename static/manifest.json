@@ -16,6 +16,7 @@
     "scripts": ["background.js"]
   },
   "permissions": ["storage", "tabs"],
+  "optional_permissions": ["bookmarks", "history"],
   "options_ui": {
     "page": "aliases.html",
     "open_in_tab": true

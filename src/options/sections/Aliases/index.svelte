@@ -24,6 +24,8 @@
     TextInput,
     Label
   } from "@lib/components";
+  import { getAliasesFromBookmarks } from "@lib/bookmarks";
+  import { getAliasesFromHistory } from "@lib/history";
 
   const { displayToast } = getToastContext();
 
@@ -122,6 +124,14 @@
     }
     await refreshAliases();
   }
+
+  async function onImportBookmarksClick() {
+    console.log(await getAliasesFromBookmarks());
+  }
+
+  async function onImportHistoryClick() {
+    console.log(await getAliasesFromHistory());
+  }
 </script>
 
 <style>
@@ -163,6 +173,8 @@
 <div class="filters">
   <Label>Filter by</Label>
   <TextInput placeholder="Ex. foobar" on:input={onFilterInput} />
+  <Button on:click={onImportBookmarksClick}>Import bookmarks</Button>
+  <Button on:click={onImportHistoryClick}>Import history</Button>
 </div>
 <div class="aliases-header">
   <div class="select">
