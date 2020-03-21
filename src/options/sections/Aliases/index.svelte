@@ -9,8 +9,6 @@
     deleteAliases
   } from "@lib/storage";
   import { onMount } from "svelte";
-  import { downloadAliases } from "@lib/download";
-  import { importFiles } from "@lib/import";
   import { getToastContext } from "../../contexts";
   import {
     Card,
