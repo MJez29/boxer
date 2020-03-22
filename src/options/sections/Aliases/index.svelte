@@ -9,7 +9,7 @@
     deleteAliases
   } from "@lib/storage";
   import { onMount } from "svelte";
-  import { getToastContext } from "../../contexts";
+  import { getToastContext, getModalContext } from "../../contexts";
   import {
     Card,
     Icon,
@@ -23,9 +23,11 @@
   } from "@lib/components";
   import { getAliasesFromBookmarks } from "@lib/bookmarks";
   import { getAliasesFromHistory } from "@lib/history";
-  import { AliasTable } from "@options/components/AliasTable";
+  import AliasTable from "@options/components/AliasTable";
+  import ImportAliasesModal from "@options/components/ImportAliasesModal.svelte";
 
   const { displayToast } = getToastContext();
+  const { showModal } = getModalContext();
 
   let aliases = [];
 
@@ -79,11 +81,13 @@
   }
 
   async function onImportBookmarksClick() {
-    console.log(await getAliasesFromBookmarks());
+    const bookmarkAliases = await getAliasesFromBookmarks();
+    showModal(ImportAliasesModal, { aliases: bookmarkAliases });
   }
 
   async function onImportHistoryClick() {
-    console.log(await getAliasesFromHistory());
+    const historyAliases = await getAliasesFromHistory();
+    showModal(ImportAliasesModal, { aliases: historyAliases });
   }
 </script>
 

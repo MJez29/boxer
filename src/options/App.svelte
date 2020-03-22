@@ -4,6 +4,7 @@
   import ToastPortal from "./sections/ToastPortal";
   import Nav from "./sections/Nav";
   import Route from "./components/Route";
+  import ModalPortal from "./components/ModalPortal";
 </script>
 
 <style>
@@ -26,13 +27,15 @@
 </style>
 
 <ToastPortal>
-  <Nav />
+  <ModalPortal>
+    <Nav />
 
-  <!-- <Hero /> -->
-  <div class="content">
-    <Route component={Aliases} />
-    <Route name="aliases" component={Aliases} />
-    <Route name="about" component={About} />
-  </div>
+    <!-- <Hero /> -->
+    <div class="content">
+      <Route component={Aliases} />
+      <Route name="aliases" component={Aliases} />
+      <Route name="about" component={About} />
+    </div>
 
+  </ModalPortal>
 </ToastPortal>

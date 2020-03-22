@@ -2,11 +2,13 @@
   import { createEventDispatcher } from "svelte";
   import { Checkbox, Button, Icon, FileUpload } from "@lib/components";
   import { downloadAliases } from "@lib/download";
-  import { importFiles } from "@lib/import";
+  import { getAliasesFromFiles } from "@lib/import";
   import AliasRow from "./AliasRow";
-  import { getToastContext } from "@options/contexts";
+  import { getToastContext, getModalContext } from "@options/contexts";
+  import ImportAliasesModal from "@options/components/ImportAliasesModal";
 
   const { displayToast } = getToastContext();
+  const { showModal } = getModalContext();
 
   /**
    * The aliases to display in the table
@@ -71,8 +73,10 @@
   };
 
   const onUpload = async e => {
-    await importFiles(e.target.files);
-    displayToast("Successfully imported aliases", "success");
+    const fileAliases = await getAliasesFromFiles(e.target.files);
+    showModal(ImportAliasesModal, {
+      aliases: fileAliases
+    });
   };
 
   function isAliasSelected(alias) {

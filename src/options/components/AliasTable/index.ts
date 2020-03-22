@@ -1,2 +1,2 @@
 import AliasTable from "./AliasTable.svelte";
-export { AliasTable };
+export default AliasTable;

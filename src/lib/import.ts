@@ -45,12 +45,11 @@ export function parseAliasesFromFile(data: string): Alias[] {
   return [];
 }
 
-export async function importFiles(files: FileList) {
+export async function getAliasesFromFiles(files: FileList): Promise<Alias[]> {
   const fileArray = Array.from(files);
   const fileContents = await readFiles(fileArray);
-  const aliases = fileContents.reduce<Alias[]>((aggr, cur) => {
+  return fileContents.reduce<Alias[]>((aggr, cur) => {
     aggr.push(...parseAliasesFromFile(cur));
     return aggr;
   }, []);
-  await mergeAliases(aliases);
 }
