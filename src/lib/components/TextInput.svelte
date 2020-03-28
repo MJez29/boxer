@@ -5,6 +5,7 @@
   export let value = "";
   export let autoFocus = false;
   export let embed = false;
+  export let autofocus = false;
 
   let focused = false;
 
@@ -36,6 +37,7 @@
 <style>
   input {
     font-size: 1rem;
+    line-height: 1rem;
     border: none;
     outline: none;
     background-color: transparent;
@@ -89,5 +91,6 @@
     on:input={onInput}
     {value}
     {placeholder}
+    {autofocus}
     aria-placeholder={placeholder} />
 </div>

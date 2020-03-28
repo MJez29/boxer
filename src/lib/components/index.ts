@@ -1,3 +1,4 @@
+import A from "./A.svelte";
 import Button from "./Button.svelte";
 import Card from "./Card.svelte";
 import Checkbox from "./Checkbox.svelte";
@@ -12,6 +13,7 @@ import TextInput from "./TextInput.svelte";
 import Toast from "./Toast.svelte";
 
 export {
+  A,
   Button,
   Card,
   Checkbox,

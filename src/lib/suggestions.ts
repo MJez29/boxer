@@ -39,7 +39,7 @@ export function getBestSuggestion(
 
 export function getDestinationUrl(input: string, aliases: Alias[]): string {
   if (input === "") {
-    return chrome.extension.getURL("options.html");
+    return chrome.extension.getURL("aliases.html");
   }
 
   const fuse = new Fuse(aliases, {
@@ -53,5 +53,5 @@ export function getDestinationUrl(input: string, aliases: Alias[]): string {
     return results[0].link;
   }
 
-  return chrome.extension.getURL("options.html");
+  return chrome.extension.getURL("aliases.html");
 }

@@ -5,6 +5,7 @@
   export let fullWidth = false;
   export let primary = false;
   export let padded = false;
+  export let disabled = false;
 </script>
 
 <style>
@@ -40,6 +41,11 @@
     background-color: #b00f30;
   }
 
+  button.primary:disabled {
+    background-color: #960e29;
+    cursor: default;
+  }
+
   button.padded {
     padding: 10px 15px;
   }
@@ -65,6 +71,7 @@
   class:transparent
   tabindex={tabIndex}
   aria-hidden={ariaHidden}
+  {disabled}
   class:fullWidth
   class:primary
   class:padded>

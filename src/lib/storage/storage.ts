@@ -19,6 +19,11 @@ export function getAliases(): Promise<Alias[]> {
   return promise;
 }
 
+export async function getAliasesByLink(link: string): Promise<Alias[]> {
+  const aliases = await getAliases();
+  return aliases.filter(alias => alias.link === link);
+}
+
 export function saveAliases(aliases: Alias[]) {
   return new Promise<void>(resolve => {
     chrome.storage.local.set(
@@ -41,7 +46,6 @@ export function isAliasValid(name: string, link: string) {
 }
 
 export async function saveAlias(name: string, link: string) {
-  console.log(name, link);
   name = name.trim().toLowerCase();
   link = link.trim().toLowerCase();
 

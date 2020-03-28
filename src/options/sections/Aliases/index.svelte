@@ -19,7 +19,8 @@
     Checkbox,
     Hr,
     TextInput,
-    Label
+    Label,
+    P
   } from "@lib/components";
   import { getAliasesFromBookmarks } from "@lib/bookmarks";
   import { getAliasesFromHistory } from "@lib/history";
@@ -96,13 +97,57 @@
     margin-bottom: 100px;
     width: 50%;
   }
+
+  .heading {
+    margin-bottom: 50px;
+  }
+
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 50px;
+  }
+
+  .filter {
+    height: 100%;
+    flex: 0 1 40%;
+  }
+
+  .action-buttons {
+    flex: 0 0 auto;
+    display: flex;
+  }
+
+  .action-button {
+    margin-left: 20px;
+  }
 </style>
 
-<div class="filters">
-  <Label>Filter by</Label>
-  <TextInput placeholder="Ex. foobar" on:input={onFilterInput} />
-  <Button on:click={onImportBookmarksClick}>Import bookmarks</Button>
-  <Button on:click={onImportHistoryClick}>Import history</Button>
+<div class="heading">
+  <Header>Aliases</Header>
+  <P>Add, edit and delete your aliases</P>
+</div>
+
+<div class="actions">
+  <div class="filter">
+    <Label>Filter by</Label>
+    <TextInput placeholder="Ex. foobar" on:input={onFilterInput} />
+  </div>
+  <div class="action-buttons">
+    <div class="action-button">
+      <Button padded primary on:click={onImportBookmarksClick}>
+        <Icon name="bookmark" />
+        &nbsp;Import bookmarks
+      </Button>
+    </div>
+    <div class="action-button">
+      <Button padded primary on:click={onImportHistoryClick}>
+        <Icon name="history" />
+        &nbsp;Import history
+      </Button>
+    </div>
+  </div>
 </div>
 
 <AliasTable
