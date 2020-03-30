@@ -10,7 +10,8 @@
     FileUpload,
     Header,
     Checkbox,
-    TextInput
+    TextInput,
+    A
   } from "@lib/components";
 
   export let name;
@@ -152,11 +153,9 @@
         <Icon name="check" />
       </Button>
     {:else}
-      <Button transparent tabIndex={-1}>
-        <a href={link}>
-          <Icon name="external-link-alt" />
-        </a>
-      </Button>
+      <A href={link} newTab transparent>
+        <Icon name="external-link-alt" />
+      </A>
     {/if}
   </div>
   <div class="right-icon">

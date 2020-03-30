@@ -20,6 +20,10 @@
 
 <style>
   a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     text-decoration: none;
     outline: none;
     position: relative;
