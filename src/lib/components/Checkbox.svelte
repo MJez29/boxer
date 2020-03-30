@@ -9,6 +9,7 @@
 
   let outerDiv;
   let innerDiv;
+  let buttonEl;
 
   afterUpdate(() => {
     const style = getComputedStyle(outerDiv);
@@ -22,6 +23,10 @@
 
   const onClick = () => {
     dispatch("check", !value);
+  };
+
+  export const focus = () => {
+    buttonEl.focus();
   };
 </script>
 
@@ -48,7 +53,7 @@
 </style>
 
 <input type="checkbox" checked={value} on:click={onClick} />
-<Button transparent on:click={onClick} ariaHidden>
+<Button transparent on:click={onClick} ariaHidden bind:this={buttonEl}>
   <div class="outer" bind:this={outerDiv}>
     {#if value}
       <div

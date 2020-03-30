@@ -3,7 +3,6 @@
 
   export let placeholder = "";
   export let value = "";
-  export let autoFocus = false;
   export let embed = false;
   export let autofocus = false;
 
@@ -25,13 +24,15 @@
     dispatch("input", event.target.value);
   }
 
-  onMount(() => {
-    if (inputEl && autoFocus) {
-      inputEl.focus();
-    }
-  });
-
   $: focusClass = focused ? "focus" : "";
+
+  export const focus = () => {
+    inputEl.focus();
+  };
+
+  export const blur = () => {
+    inputEl.blur();
+  };
 </script>
 
 <style>

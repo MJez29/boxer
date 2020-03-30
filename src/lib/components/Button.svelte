@@ -6,6 +6,12 @@
   export let primary = false;
   export let padded = false;
   export let disabled = false;
+
+  let buttonEl;
+
+  export const focus = () => {
+    buttonEl.focus();
+  };
 </script>
 
 <style>
@@ -67,6 +73,7 @@
 </style>
 
 <button
+  bind:this={buttonEl}
   on:click
   class:transparent
   tabindex={tabIndex}

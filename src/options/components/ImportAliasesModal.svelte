@@ -70,6 +70,7 @@
     <P>Review and edit the aliases you are about to add</P>
   </div>
   <AliasTable
+    autoFocus
     {aliases}
     on:deleteAlias={onDeleteAlias}
     on:deleteAliases={onDeleteAliases}

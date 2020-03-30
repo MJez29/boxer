@@ -21,6 +21,8 @@
   let editedName = "";
   let editedLink = "";
 
+  let nameInput;
+
   const dispatch = createEventDispatcher();
 
   let editing = name === undefined && link === undefined;
@@ -37,6 +39,11 @@
     editing = true;
     editedName = name;
     editedLink = link;
+    setTimeout(() => {
+      if (nameInput) {
+        nameInput.focus();
+      }
+    }, 100);
   };
 
   const onNameInput = event => {
@@ -121,9 +128,9 @@
     {#if editing}
       <TextInput
         embed
+        bind:this={nameInput}
         value={editedName}
         on:input={onNameInput}
-        autoFocus
         placeholder="Enter a name" />
     {:else}
       <div class="ellipsis">{name}</div>

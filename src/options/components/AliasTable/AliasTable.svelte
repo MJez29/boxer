@@ -1,5 +1,5 @@
 <script>
-  import { createEventDispatcher } from "svelte";
+  import { createEventDispatcher, onMount } from "svelte";
   import { Checkbox, Button, Icon, FileUpload } from "@lib/components";
   import { downloadAliases } from "@lib/download";
   import { getAliasesFromFiles } from "@lib/import";
@@ -34,9 +34,16 @@
    */
   export let expandable = false;
 
+  /**
+   * If set to true, the first element in the table will be focused
+   */
+  export let autoFocus = false;
+
   const dispatch = createEventDispatcher();
 
   let selectedAliases = new Set();
+
+  let selectAllCheckboxEl;
 
   const onAliasSelect = alias => {
     if (selectedAliases.has(alias.name)) {
@@ -100,6 +107,12 @@
       new: newAlias
     });
   };
+
+  onMount(() => {
+    if (autoFocus && selectAllCheckboxEl) {
+      selectAllCheckboxEl.focus();
+    }
+  });
 </script>
 
 <style>
@@ -136,6 +149,7 @@
 <div class="aliases-header">
   <div class="select">
     <Checkbox
+      bind:this={selectAllCheckboxEl}
       value={selectedAliases.size === aliases.length}
       on:check={onCheckAll} />
   </div>
