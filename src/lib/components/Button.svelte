@@ -26,6 +26,7 @@
     border-radius: 4px;
     color: inherit;
     padding: 0;
+    transition: background-color 0.2s ease;
   }
 
   button.fullWidth {
@@ -58,7 +59,6 @@
 
   .transparent {
     background-color: transparent;
-    transition: background-color ease 0.2s;
   }
 
   .transparent:hover,

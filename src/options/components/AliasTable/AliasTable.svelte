@@ -45,6 +45,19 @@
 
   let selectAllCheckboxEl;
 
+  let sortField = "name";
+  let sortings = {
+    name: 1,
+    link: 1
+  };
+
+  $: {
+    aliases = aliases.sort(
+      (a1, a2) =>
+        sortings[sortField] * a1[sortField].localeCompare(a2[sortField])
+    );
+  }
+
   const onAliasSelect = alias => {
     if (selectedAliases.has(alias.name)) {
       selectedAliases.delete(alias.name);
@@ -108,6 +121,14 @@
     });
   };
 
+  const onSortClick = field => {
+    sortField = field;
+    sortings = {
+      ...sortings,
+      [sortField]: sortings[sortField] * -1
+    };
+  };
+
   onMount(() => {
     if (autoFocus && selectAllCheckboxEl) {
       selectAllCheckboxEl.focus();
@@ -153,8 +174,18 @@
       value={selectedAliases.size === aliases.length}
       on:check={onCheckAll} />
   </div>
-  <div class="name">Name</div>
-  <div class="link">Link</div>
+  <div class="name">
+    Name&nbsp;
+    <Button transparent on:click={() => onSortClick('name')}>
+      <Icon name={sortings.name > 0 ? 'caret-down' : 'caret-up'} />
+    </Button>
+  </div>
+  <div class="link">
+    Link&nbsp;
+    <Button transparent on:click={() => onSortClick('link')}>
+      <Icon name={sortings.link > 0 ? 'caret-down' : 'caret-up'} />
+    </Button>
+  </div>
   <div class="right-icon">
     {#if downloadable}
       <Button on:click={onDownload} transparent>

@@ -26,12 +26,12 @@
 <style>
   .container {
     position: relative;
-    background-color: rgb(183, 17, 50);
+    background-color: #b00f30;
   }
 
   a {
     display: block;
-    padding: 10px 15px;
+    padding: 10px 15px 10px 30px;
     color: #f5f5f5;
     width: 100%;
     text-decoration: none;
@@ -46,17 +46,23 @@
     right: 100%;
     left: 0;
     bottom: 0;
-    background-color: rgb(157, 14, 43);
+    background-color: #960e29;
     transition: right 0.2s ease;
     z-index: 0;
   }
 
-  .bg.active {
-    right: calc(100% - 10px);
-  }
-
   .bg.animate {
     right: 0;
+  }
+
+  .bg.active.active::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: calc(100% - 5px);
+    bottom: 0;
+    left: 0;
+    background-color: #f5f5f5;
   }
 </style>
 
