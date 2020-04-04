@@ -4,8 +4,8 @@
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "prettier/@typescript-eslint",
-    "plugin:prettier/recommended",
-    "plugin:jest/style"
+    "plugin:jest/style",
+    "plugin:prettier/recommended"
   ],
   "env": {
     "browser": true,

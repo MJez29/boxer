@@ -1,4 +1,4 @@
-import { Alias, formatAsName } from "@lib/aliases";
+import { Alias, formatAsName, filterOutExistingAliases } from "@lib/aliases";
 import { requestPermission, removePermission } from "./permissions";
 
 export function getBookmarks(): Promise<chrome.bookmarks.BookmarkTreeNode[]> {
@@ -65,7 +65,8 @@ export async function getAliasesFromBookmarks(): Promise<Alias[]> {
   try {
     await removePermission("bookmarks");
   } catch {}
-  return bookmarkTreeNodes.flatMap(node =>
+  const aliases = await bookmarkTreeNodes.flatMap(node =>
     getAliasesFromBookmarkTreeNode(node)
   );
+  return filterOutExistingAliases(aliases);
 }

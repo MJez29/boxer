@@ -1,5 +1,6 @@
 <script>
   import { setContext } from "svelte";
+  import { fly, blur, fade } from "svelte/transition";
   import { MODAL_KEY } from "../contexts";
   import { Button, Icon } from "@lib/components";
 
@@ -66,16 +67,16 @@
 <slot />
 
 <div class="modal-portal" class:visible={!!modal} on:click={hideModal}>
-  <div class="inner-container">
-    <div class="content" on:click={stopPropagation}>
-      <div class="close-button">
-        <Button transparent on:click={hideModal}>
-          <Icon name="times" />
-        </Button>
-      </div>
-      {#if modal}
+  {#if modal}
+    <div class="inner-container">
+      <div class="content" on:click={stopPropagation}>
+        <div class="close-button">
+          <Button transparent on:click={hideModal}>
+            <Icon name="times" />
+          </Button>
+        </div>
         <svelte:component this={modal} {...props} />
-      {/if}
+      </div>
     </div>
-  </div>
+  {/if}
 </div>

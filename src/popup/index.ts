@@ -5,4 +5,4 @@ const popup = new Popup({
 });
 
 export default popup;
-let x = 1;
+const x = 1;

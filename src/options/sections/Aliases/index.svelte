@@ -139,8 +139,7 @@
 </div>
 
 <div class="search">
-  <Label>Filter by</Label>
-  <TextInput placeholder="Ex. foobar" on:input={onFilterInput} />
+  <TextInput placeholder="Search aliases" on:input={onFilterInput} />
 </div>
 
 <AliasTable

@@ -1,4 +1,4 @@
-import { Alias, getNameSuggestion } from "./aliases";
+import { Alias, getNameSuggestion, filterOutExistingAliases } from "./aliases";
 import { requestPermission, removePermission } from "./permissions";
 
 const ONE_WEEK = 1000 * 60 * 60 * 24 * 7;
@@ -24,7 +24,8 @@ export async function getAliasesFromHistory(): Promise<Alias[]> {
   try {
     await removePermission("history");
   } catch {}
-  return history
+  const aliases = history
     .filter(h => (h.visitCount ?? 0) > 10)
     .map(h => ({ name: getNameSuggestion(h), link: h.url ?? "" }));
+  return filterOutExistingAliases(aliases);
 }

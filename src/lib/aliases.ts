@@ -1,3 +1,5 @@
+import { getAliases } from "./storage";
+
 export interface Alias {
   name: string;
   link: string;
@@ -65,4 +67,12 @@ export function getNameSuggestion({
   name += title;
 
   return formatAsName(name);
+}
+
+export async function filterOutExistingAliases(aliases: Alias[]) {
+  const existingAliases = await getAliases();
+  const links = new Set();
+  existingAliases.forEach(alias => links.add(alias.link));
+
+  return aliases.filter(alias => !links.has(alias.link));
 }
