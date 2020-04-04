@@ -93,30 +93,19 @@
 </script>
 
 <style>
-  .filters {
-    margin-bottom: 100px;
-    width: 50%;
+  .heading {
+    display: flex;
+    margin-bottom: 20px;
   }
 
-  .heading {
-    margin-bottom: 50px;
+  .heading .text {
+    flex: 1;
   }
 
   .actions {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 50px;
-  }
-
-  .filter {
-    height: 100%;
-    flex: 0 1 40%;
-  }
-
-  .action-buttons {
-    flex: 0 0 auto;
-    display: flex;
+    margin-left: 20px;
   }
 
   .action-button {
@@ -129,12 +118,11 @@
 </style>
 
 <div class="heading">
-  <Header>Aliases</Header>
-  <P>Add, edit and delete your aliases</P>
-</div>
-
-<div class="actions">
-  <div class="action-buttons">
+  <div class="text">
+    <Header>Aliases</Header>
+    <P>Add, edit and delete your aliases</P>
+  </div>
+  <div class="actions">
     <div class="action-button">
       <Button padded primary on:click={onImportBookmarksClick}>
         <Icon name="bookmark" />
