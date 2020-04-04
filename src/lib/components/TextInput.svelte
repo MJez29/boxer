@@ -6,6 +6,8 @@
   export let embed = false;
   export let autofocus = false;
 
+  let outlined = !embed;
+
   let focused = false;
 
   let inputEl = null;
@@ -51,14 +53,13 @@
     padding: 0;
   }
 
-  input:focus {
-    border-width: 4px;
-  }
-
   .container {
     position: relative;
     height: 100%;
     display: flex;
+  }
+
+  .container.embed {
     border-bottom: 2px solid rgba(41, 4, 11, 0.2);
   }
 
@@ -66,19 +67,33 @@
     border-bottom: none;
   }
 
-  .container::after {
+  .container.embed::after {
     content: "";
     position: absolute;
     top: 100%;
     bottom: -2px;
     left: 0;
     right: 100%;
-    background-color: #dc143c;
     transition: right ease 0.2s;
   }
 
-  .container.focused::after {
+  .container.embed.focused::after {
     right: 0;
+  }
+
+  .outlined {
+    border: 2px solid #e0dcdd;
+    border-radius: 4px;
+    padding: 10px;
+    transition: all 0.2s ease;
+  }
+
+  .outlined::placeholder {
+    color: #ccc5c6;
+  }
+
+  .outlined:focus {
+    border-color: #dc143c;
   }
 </style>
 
@@ -86,6 +101,7 @@
   <input
     class="input"
     class:embed
+    class:outlined
     bind:this={inputEl}
     on:focus={onFocus}
     on:blur={onBlur}

@@ -122,6 +122,10 @@
   .action-button {
     margin-left: 20px;
   }
+
+  .search {
+    margin-bottom: 20px;
+  }
 </style>
 
 <div class="heading">
@@ -130,10 +134,6 @@
 </div>
 
 <div class="actions">
-  <div class="filter">
-    <Label>Filter by</Label>
-    <TextInput placeholder="Ex. foobar" on:input={onFilterInput} />
-  </div>
   <div class="action-buttons">
     <div class="action-button">
       <Button padded primary on:click={onImportBookmarksClick}>
@@ -148,6 +148,11 @@
       </Button>
     </div>
   </div>
+</div>
+
+<div class="search">
+  <Label>Filter by</Label>
+  <TextInput placeholder="Ex. foobar" on:input={onFilterInput} />
 </div>
 
 <AliasTable
