@@ -1,6 +1,6 @@
 <style>
   .header {
-    font-size: 24px;
+    font-size: 32px;
     font-weight: 400;
     margin: 0 0 10px;
   }

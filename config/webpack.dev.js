@@ -8,5 +8,10 @@ module.exports = merge(common, {
   devServer: {
     contentBase: "./build"
   },
-  plugins: [new ReloadChromeExtensionPlugin("Boxer")]
+  plugins: [
+    new ReloadChromeExtensionPlugin({
+      extensionName: "Boxer",
+      pageToOpen: "aliases.html"
+    })
+  ]
 });
