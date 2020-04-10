@@ -1,9 +1,10 @@
 <style>
   code {
     background-color: rgba(41, 4, 11, 0.1);
-    padding-left: 5px;
-    padding-right: 5px;
+    padding: 2px 4px;
     border-radius: 4px;
+    font-family: "Roboto Mono", monospace;
+    font-size: 14px;
   }
 </style>
 

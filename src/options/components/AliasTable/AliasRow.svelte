@@ -86,10 +86,6 @@
     border-top: 2px solid rgba(41, 4, 11, 0.2);
   }
 
-  .alias a {
-    color: inherit;
-  }
-
   .select {
     flex: 0 0 40px;
   }
@@ -150,29 +146,29 @@
   <div class="right-icon">
     {#if !editing}
       <Button on:click={onEdit} transparent>
-        <Icon name="pencil-alt" />
+        <Icon red name="pencil-alt" />
       </Button>
     {/if}
   </div>
   <div class="right-icon">
     {#if editing}
       <Button transparent on:click={onSave}>
-        <Icon name="check" />
+        <Icon red name="check" />
       </Button>
     {:else}
       <A href={link} newTab transparent>
-        <Icon name="external-link-alt" />
+        <Icon red name="external-link-alt" />
       </A>
     {/if}
   </div>
   <div class="right-icon">
     {#if editing}
       <Button transparent on:click={onCancel}>
-        <Icon name="times" />
+        <Icon red name="times" />
       </Button>
     {:else}
       <Button on:click={onDelete} transparent>
-        <Icon name="trash" />
+        <Icon red name="trash" />
       </Button>
     {/if}
   </div>

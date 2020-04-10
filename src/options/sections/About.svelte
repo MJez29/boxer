@@ -1,32 +1,103 @@
 <script>
-  import { Code, Header } from "@lib/components";
+  import { Code, Header, P, A, Subheader } from "@lib/components";
 </script>
 
 <Header>Boxer</Header>
-<p>
-  Boxer is a browser extension that lets you customize your search bar
-  experience. To activate Boxer simple type
-  <Code>/</Code>
-  in your search bar followed by a space or a tab. For Boxer to be of assistance
-  you must first define aliases. An alias is a mapping from a series of
-  keywords, for example "google maps", to a url, "https://maps.google.com".
-</p>
 
-<Header>Adding an Alias</Header>
-<p>
-  To add an alias simply navigate to the Aliases page and enter a name and link
-  for your alias in the empty row. Once you are satisfied with your alias press
-  the checkmark to save!
-</p>
+<P>
+  Boxer is a browser extension that allows you to register aliases in the form
+  of a series of keywords for sites you frequent often. Typing these aliases
+  into Boxer will bring you exactly where you want to go!
+</P>
 
-<Header>Activating Boxer in the Search Bar</Header>
-<p>
-  In the search bar enter a forward slash (
+<Header>Getting Started</Header>
+
+<P>Let's add our first alias!</P>
+
+<P>
+  In this tutorial we'll use
+  <Code>https://github.com/MJez29/boxer</Code>
+  (the repository for the code of this extension) as our example site to alias
+  but these steps can be applied to any site of your choice.
+</P>
+
+<Subheader>Adding an Alias from a Webpage</Subheader>
+<P>
+  Lets navigate to
+  <A href="https://github.com/MJez29/boxer" newTab>
+    https://github.com/MJez29/boxer
+  </A>
+  in a new tab. Click on the boxer icon in the chrome menu bar (or use Ctrl+b
+  (Cmd for mac)). This will toggle the Boxer extension popup like so.
+</P>
+[Insert image]
+<P>
+  Go on and click the
+  <Code>Add alias</Code>
+  button. We've created our first alias!
+</P>
+<Subheader>Viewing and Managing Aliases</Subheader>
+<P>
+  Click on the
+  <Code>My aliases</Code>
+  button in the Boxer popup to be brought to the list of your extensions.
+  Currently you should have only one alias:
+  <Code>github mjez29 boxer</Code>
+  linking to
+  <Code>https://github.com/mjez29/boxer</Code>
+  . The name
+  <Code>github mjez29 boxer</Code>
+  was automatically generated from the page we wanted to alias but is a little
+  verbose. Click on the pencil icon to rename it to
+  <Code>boxer github</Code>
+  and then the pencil icon to save your changes!
+</P>
+<Subheader>Using an Alias</Subheader>
+<P>
+  Now that we've created our alias it's time to put it to use to speed up our
+  browsing. Click into the search bar to focus it. Type a slash (
   <Code>/</Code>
-  ) followed by either the tab key or the space key. This activates Boxer. Now
-  start typing the name of the alias you creating in the last section, it should
-  appear as the first search result. You can choose it by clicking on it, by
-  tabbing down to it and pressing enter, or by clicking enter and having Boxer
-  take you to the link that best matches your input (in this case it should be
-  your alias).
-</p>
+  ) followed by a space or a tab, this activates Boxer. Then, begin typing the
+  alias name. You should see our alias as the first result! Pressing enter will
+  bring you to our alias' url.
+</P>
+<Subheader>Adding more Aliases</Subheader>
+<P>
+  Now that you're a pro at using Boxer it's time to add more aliases! On the
+  aliases page you can click the
+  <Code>Import bookmarks</Code>
+  or
+  <Code>Import history</Code>
+  buttons to import your bookmarks or sites that you visit often. You can also
+  upload alias packs (files ending in
+  <Code>.json</Code>
+  ) containing related aliases.
+</P>
+
+<Header>Motivation Behind Boxer</Header>
+
+<P>
+  As a software developer I like to type. I try to use my keyboard as much as
+  possible to navigate through my computer, especially the web. As such, I
+  haven't created a bookmark in years and my primary method of navigating to a
+  site is by typing a portion of their url and following the first search result
+  containing my target domain. If I'm lucky this will bring me exactly where I
+  want to go but, if not, I will have to navigate around the site a little bit
+  to get exactly where I want to go. To minimize those seconds wasted I created
+  Boxer.
+</P>
+
+<P>
+  Boxer allows me to continue navigating through typing but instead of having to
+  sift through my entire browser history to predict where I want to go, Boxer
+  already has a curated list of probable places I'd like to go.
+</P>
+
+<Header>Help! Something Doesn't Work!</Header>
+<P>
+  Please file an issue at
+  <A href="https://github.com/MJez29/boxer/issues" newTab>
+    https://github.com/MJez29/boxer/issues
+  </A>
+  and we'll look into it as soon as possible.
+</P>

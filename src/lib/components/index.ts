@@ -9,6 +9,7 @@ import Hr from "./Hr.svelte";
 import Icon from "./Icon.svelte";
 import Label from "./Label.svelte";
 import P from "./P.svelte";
+import Subheader from "./Subheader.svelte";
 import TextInput from "./TextInput.svelte";
 import Toast from "./Toast.svelte";
 
@@ -24,6 +25,7 @@ export {
   Icon,
   Label,
   P,
+  Subheader,
   TextInput,
   Toast
 };

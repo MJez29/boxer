@@ -35,6 +35,11 @@
     border-radius: 4px;
     color: inherit;
     padding: 0;
+    color: #dc143c;
+  }
+
+  a:hover {
+    text-decoration: underline;
   }
 
   .padded {
@@ -42,6 +47,7 @@
   }
 
   .transparent {
+    color: black;
     background-color: transparent;
     transition: background-color ease 0.2s;
   }
@@ -50,6 +56,7 @@
   .transparent:focus,
   .transparent:focus-within {
     background-color: rgba(41, 4, 11, 0.1);
+    text-decoration: none;
   }
 
   .transparent:active {

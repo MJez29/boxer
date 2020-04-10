@@ -91,11 +91,6 @@
   .button-container {
     text-align: center;
   }
-
-  .saved {
-    padding: 10px 15px;
-    margin: 0 auto;
-  }
 </style>
 
 <div class="container">

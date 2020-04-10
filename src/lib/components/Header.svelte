@@ -1,8 +1,12 @@
 <style>
   .header {
-    font-size: 32px;
+    font-size: 40px;
     font-weight: 400;
-    margin: 0 0 10px;
+    margin: 40px 0 15px;
+  }
+
+  .header:first-child {
+    margin-top: 0;
   }
 </style>
 

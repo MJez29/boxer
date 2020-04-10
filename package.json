@@ -1,13 +1,14 @@
 {
   "name": "omnibox",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "build": "webpack --config config/webpack.prod.js",
     "lint": "eslint --ext .js,.ts,.tsx src/ --fix",
     "start": "webpack --config config/webpack.dev.js --watch",
-    "test": "jest"
+    "test": "jest",
+    "release": "npm run build && node ./config/create-release.js"
   },
   "author": "",
   "license": "ISC",
@@ -16,6 +17,7 @@
     "@types/jest": "^25.1.4",
     "@typescript-eslint/eslint-plugin": "^2.24.0",
     "@typescript-eslint/parser": "^2.24.0",
+    "archiver": "^3.1.1",
     "copy-webpack-plugin": "^5.1.1",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.1",

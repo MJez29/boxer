@@ -11,7 +11,7 @@ module.exports = merge(common, {
   plugins: [
     new ReloadChromeExtensionPlugin({
       extensionName: "Boxer",
-      pageToOpen: "aliases.html"
+      pageToOpen: "aliases.html?path=about"
     })
   ]
 });
