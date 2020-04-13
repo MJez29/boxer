@@ -1,5 +1,11 @@
-import { Alias, formatAsName, filterOutExistingAliases } from "@lib/aliases";
+import {
+  Alias,
+  formatAsName,
+  filterOutExistingAliases,
+  getNameSuggestion
+} from "@lib/aliases";
 import { requestPermission, removePermission } from "./permissions";
+import { isAliasValid } from "./storage";
 
 export function getBookmarks(): Promise<chrome.bookmarks.BookmarkTreeNode[]> {
   return new Promise(resolve => {
@@ -65,8 +71,29 @@ export async function getAliasesFromBookmarks(): Promise<Alias[]> {
   try {
     await removePermission("bookmarks");
   } catch {}
-  const aliases = await bookmarkTreeNodes.flatMap(node =>
-    getAliasesFromBookmarkTreeNode(node)
-  );
+  const { aliases } = await bookmarkTreeNodes
+    .flatMap(node => getAliasesFromBookmarkTreeNode(node))
+    .reduce(
+      (state, alias) => {
+        const name = alias.name;
+        const link = alias.link;
+
+        if (isAliasValid(name, link) && !state.names.has(name)) {
+          state.aliases.push({
+            name,
+            link
+          });
+          state.names.add(name);
+          state.links.add(link);
+        }
+
+        return state;
+      },
+      {
+        aliases: [] as Alias[],
+        names: new Set(),
+        links: new Set()
+      }
+    );
   return filterOutExistingAliases(aliases);
 }

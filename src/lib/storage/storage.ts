@@ -42,12 +42,12 @@ export function isAliasNameTaken(name: string, aliases: Alias[]) {
 }
 
 export function isAliasValid(name: string, link: string) {
-  return name.trim().length > 0 && link.trim().length > 0;
+  return name.length > 0 && link.length > 0;
 }
 
 export async function saveAlias(name: string, link: string) {
   name = name.trim().toLowerCase();
-  link = link.trim().toLowerCase();
+  link = link.trim();
 
   const aliases = await getAliases();
   if (isAliasNameTaken(name, aliases)) {
