@@ -24,6 +24,7 @@
   } from "@lib/components";
   import { getAliasesFromBookmarks } from "@lib/bookmarks";
   import { getAliasesFromHistory } from "@lib/history";
+  import { getAliasesFromFiles } from "@lib/import";
   import AliasTable from "@options/components/AliasTable";
   import ImportAliasesModal from "@options/components/ImportAliasesModal.svelte";
 
@@ -93,8 +94,10 @@
     refreshAliases();
   }
 
-  async function onImportFileClick() {
+  async function onImportFileClick(e) {
+    console.log(e.target.files);
     const fileAliases = await getAliasesFromFiles(e.target.files);
+    console.log(fileAliases);
     await showModal(ImportAliasesModal, {
       aliases: fileAliases
     });
@@ -149,7 +152,7 @@
       <FileUpload
         multiple
         accept="application/json"
-        on:click={onImportFileClick}>
+        on:input={onImportFileClick}>
         <Button padded primary>
           <Icon name="upload" />
           &nbsp;Import file
