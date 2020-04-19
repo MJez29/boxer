@@ -24,7 +24,7 @@ export function isAliasArray(aliases: unknown): aliases is Alias[] {
 
 export function formatAsName(s: string) {
   let name = s
-    .replace(/-|_|\||\//g, " ")
+    .replace(/\W/g, " ")
     .replace(/ ( )+/g, " ")
     .toLowerCase()
     .trim();

@@ -1,5 +1,6 @@
 import { Alias } from "./aliases";
 import * as Fuse from "fuse.js";
+import { escapeXML } from "./xml";
 
 function matches(full: string, search: string) {
   return full.startsWith(search);
@@ -14,7 +15,7 @@ function aliasToSuggestResult(
     description: `${name.replace(
       new RegExp(input),
       "<match>$&</match>"
-    )} - <url>${link}</url>`
+    )} - <url>${escapeXML(link)}</url>`
   };
 }
 
