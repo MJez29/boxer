@@ -27,8 +27,8 @@
   <A href="https://github.com/MJez29/boxer" newTab>
     https://github.com/MJez29/boxer
   </A>
-  in a new tab. Click on the boxer icon in the chrome menu bar (or use Ctrl+b
-  (Cmd for mac)). This will toggle the Boxer extension popup like so.
+  in a new tab. Click on the boxer icon in the chrome menu bar (or use Alt+B).
+  This will toggle the Boxer extension popup like so.
 </P>
 [Insert image]
 <P>
