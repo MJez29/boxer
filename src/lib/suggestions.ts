@@ -50,7 +50,6 @@ export function getDestinationUrl(input: string, aliases: Alias[]): string {
   const results = fuse.search(input);
 
   if (results.length > 0) {
-    console.log(results);
     return results[0].link;
   }
 

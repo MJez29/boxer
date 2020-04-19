@@ -8,7 +8,6 @@
   let toasts = [];
 
   const popToast = () => {
-    console.log(toasts);
     toasts = toasts.slice(1);
   };
 

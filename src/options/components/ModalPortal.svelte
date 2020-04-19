@@ -6,15 +6,27 @@
 
   let modal;
   let props;
+  let resolve;
+
+  const resolveExistingPromise = () => {
+    if (resolve) {
+      resolve();
+    }
+    resolve = undefined;
+  };
 
   const showModal = (newModal, newProps) => {
+    resolveExistingPromise();
     modal = newModal;
     props = newProps;
     document.body.style.overflowY = "hidden";
-    console.log(newModal, newProps);
+    return new Promise(res => {
+      resolve = res;
+    });
   };
 
   const hideModal = () => {
+    resolveExistingPromise();
     modal = null;
     document.body.style.overflowY = "auto";
   };

@@ -23,12 +23,6 @@
   export let downloadable = false;
 
   /**
-   * If you can upload alias files to the table
-   * @type { boolean }
-   */
-  export let uploadable = false;
-
-  /**
    * If there should be an empty table row at the bottom for new aliases
    * @type { boolean }
    */
@@ -90,13 +84,6 @@
       downloadAliases(aliases);
     }
     displayToast("Download complete", "success");
-  };
-
-  const onUpload = async e => {
-    const fileAliases = await getAliasesFromFiles(e.target.files);
-    showModal(ImportAliasesModal, {
-      aliases: fileAliases
-    });
   };
 
   function isAliasSelected(alias) {
@@ -186,20 +173,12 @@
       <Icon name={sortings.link > 0 ? 'caret-down' : 'caret-up'} />
     </Button>
   </div>
+  <div class="right-icon" />
   <div class="right-icon">
     {#if downloadable}
       <Button on:click={onDownload} transparent>
         <Icon name="download" />
       </Button>
-    {/if}
-  </div>
-  <div class="right-icon">
-    {#if uploadable}
-      <FileUpload multiple accept="application/json" on:input={onUpload}>
-        <Button transparent>
-          <Icon name="upload" />
-        </Button>
-      </FileUpload>
     {/if}
   </div>
   <div class="right-icon">

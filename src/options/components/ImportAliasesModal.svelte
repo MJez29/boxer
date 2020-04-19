@@ -35,8 +35,8 @@
     }
   };
 
-  const importAliases = () => {
-    mergeAliases(aliases);
+  const importAliases = async () => {
+    await mergeAliases(aliases);
     hideModal();
   };
 </script>

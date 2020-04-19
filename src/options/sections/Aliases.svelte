@@ -9,7 +9,7 @@
     deleteAliases
   } from "@lib/storage";
   import { onMount } from "svelte";
-  import { getToastContext, getModalContext } from "../../contexts";
+  import { getToastContext, getModalContext } from "../contexts";
   import {
     Card,
     Icon,
@@ -83,12 +83,22 @@
 
   async function onImportBookmarksClick() {
     const bookmarkAliases = await getAliasesFromBookmarks();
-    showModal(ImportAliasesModal, { aliases: bookmarkAliases });
+    await showModal(ImportAliasesModal, { aliases: bookmarkAliases });
+    refreshAliases();
   }
 
   async function onImportHistoryClick() {
     const historyAliases = await getAliasesFromHistory();
-    showModal(ImportAliasesModal, { aliases: historyAliases });
+    await showModal(ImportAliasesModal, { aliases: historyAliases });
+    refreshAliases();
+  }
+
+  async function onImportFileClick() {
+    const fileAliases = await getAliasesFromFiles(e.target.files);
+    await showModal(ImportAliasesModal, {
+      aliases: fileAliases
+    });
+    refreshAliases();
   }
 </script>
 
@@ -134,6 +144,17 @@
         <Icon name="history" />
         &nbsp;Import history
       </Button>
+    </div>
+    <div class="action-button">
+      <FileUpload
+        multiple
+        accept="application/json"
+        on:click={onImportFileClick}>
+        <Button padded primary>
+          <Icon name="upload" />
+          &nbsp;Import file
+        </Button>
+      </FileUpload>
     </div>
   </div>
 </div>
