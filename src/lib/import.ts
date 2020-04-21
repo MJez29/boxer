@@ -1,4 +1,3 @@
-import { mergeAliases } from "./storage";
 import { Alias, isAliasArray } from "@lib/aliases";
 
 export function readFile(file: File): Promise<string> {

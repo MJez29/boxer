@@ -1,9 +1,4 @@
-import {
-  Alias,
-  formatAsName,
-  filterOutExistingAliases,
-  getNameSuggestion
-} from "@lib/aliases";
+import { Alias, formatAsName, filterOutExistingAliases } from "@lib/aliases";
 import { requestPermission, removePermission } from "./permissions";
 import { isAliasValid } from "./storage";
 

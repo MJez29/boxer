@@ -1,8 +1,6 @@
-import { Alias, isAlias, isAliasArray, areAliasesEqual } from "@lib/aliases";
+import { Alias, isAliasArray, areAliasesEqual } from "@lib/aliases";
 
 const ALIAS_STORE_KEY = "aliases";
-const SCHEMA_VERSION_KEY = "version";
-const SCHEMA_VERSION = "1";
 
 export function getAliases(): Promise<Alias[]> {
   const promise = new Promise<Alias[]>((resolve, reject) => {
