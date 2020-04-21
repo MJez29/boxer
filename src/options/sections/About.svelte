@@ -16,18 +16,18 @@
 
 <P>
   In this tutorial we'll use
-  <Code>https://github.com/MJez29/boxer</Code>
-  (the repository for the code of this extension) as our example site to alias
-  but these steps can be applied to any site of your choice.
+  <Code>https://github.com/MJez29/boxer/issues</Code>
+  (the page to report bugs for Boxer) as our example site to alias but these
+  steps can be applied to any site of your choice.
 </P>
 
 <Subheader>Adding an Alias from a Webpage</Subheader>
 <P>
   Lets navigate to
-  <A href="https://github.com/MJez29/boxer" newTab>
-    https://github.com/MJez29/boxer
+  <A href="https://github.com/MJez29/boxer/issues" newTab>
+    https://github.com/MJez29/boxer/issues
   </A>
-  in a new tab. Click on the boxer icon in the chrome menu bar (or use Alt+B).
+  in a new tab. Click on the Boxer icon in the chrome menu bar (or use Alt+B).
   This will toggle the Boxer extension popup like so.
 </P>
 [Insert image]
@@ -42,14 +42,14 @@
   <Code>My aliases</Code>
   button in the Boxer popup to be brought to the list of your extensions.
   Currently you should have only one alias:
-  <Code>github mjez29 boxer</Code>
+  <Code>github issues mjez29 boxer</Code>
   linking to
-  <Code>https://github.com/mjez29/boxer</Code>
+  <Code>https://github.com/mjez29/boxer/issues</Code>
   . The name
-  <Code>github mjez29 boxer</Code>
+  <Code>github issues mjez29 boxer</Code>
   was automatically generated from the page we wanted to alias but is a little
   verbose. Click on the pencil icon to rename it to
-  <Code>boxer github</Code>
+  <Code>boxer help</Code>
   and then the pencil icon to save your changes!
 </P>
 <Subheader>Using an Alias</Subheader>
