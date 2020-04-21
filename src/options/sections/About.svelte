@@ -1,5 +1,5 @@
 <script>
-  import { Code, Header, P, A, Subheader } from "@lib/components";
+  import { Code, Header, P, A, Subheader, Icon } from "@lib/components";
 </script>
 
 <Header>Boxer</Header>
@@ -72,6 +72,47 @@
   upload alias packs (files ending in
   <Code>.json</Code>
   ) containing related aliases.
+</P>
+
+<Header>Becoming a Power User</Header>
+
+<P>
+  Now that you've gotten the hang of Boxer these tips and tricks can help you
+  navigate the web with Boxer even faster.
+</P>
+
+<Subheader>Focusing the Search Box</Subheader>
+
+<P>
+  To jump to a new site without having to leave your keyboard use Ctrl+L to move
+  your cursor to the browser search box. Note that this shortcut is built into
+  Chrome so you will still have to enter
+  <Code>/</Code>
+  to use Boxer.
+</P>
+
+<Subheader>Toggling the Extension Popup</Subheader>
+
+<P>
+  Use
+  <Code>Alt+B</Code>
+  to toggle the Boxer extension popup on any webpage to quickly give it an
+  alias.
+</P>
+
+<Subheader>Navigating to the Aliases Page</Subheader>
+
+<P>
+  When in Boxer mode inside the search bar, pressing the Enter key without any
+  input will bring you to your aliases page. This can be done quickly through
+  the following key combination
+  <Code>Ctrl + L</Code>
+  <Icon name="long-arrow-alt-right" />
+  <Code>/</Code>
+  <Icon name="long-arrow-alt-right" />
+  <Code />
+  <Icon name="long-arrow-alt-right" />
+  <Code>[Enter]</Code>
 </P>
 
 <Header>Motivation Behind Boxer</Header>
