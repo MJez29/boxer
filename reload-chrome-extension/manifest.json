@@ -4,7 +4,12 @@
   "manifest_version": 2,
   "background": {
     "persistent": true,
-    "scripts": ["reload.js"]
+    "scripts": [
+      "reload.js"
+    ]
   },
-  "permissions": ["management"]
+  "permissions": [
+    "management",
+    "alarms"
+  ]
 }

@@ -1,9 +1,9 @@
+const ALARM_NAME = "Reload Chrome Extension Alarm";
+
 function reloadExtension(id) {
   return new Promise(resolve => {
     chrome.management.setEnabled(id, false, (...args) => {
-      console.log("setEnabled false", ...args);
       chrome.management.setEnabled(id, true, (...args) => {
-        console.log("setEnabled true", ...args);
         resolve();
       });
     });
@@ -17,38 +17,62 @@ function openPage(id, pageToOpen) {
         url: `chrome-extension://${id}/${pageToOpen}`
       },
       (...args) => {
-        console.log("create", ...args);
         resolve();
       }
     );
   });
 }
 
-const reloadSocket = new WebSocket("ws://localhost:8081");
+function createAlarm(now = false) {
+  chrome.alarms.create(ALARM_NAME, {
+    when: Date.now() + (now ? 0 : 60 * 1000)
+  });
+}
 
-reloadSocket.onopen = () => {
-  console.log("Reload socket connected!");
-};
+function createSocket() {
+  const socket = new WebSocket("ws://localhost:8081");
 
-reloadSocket.onmessage = event => {
-  try {
-    const data = JSON.parse(event.data);
-    const extName = data.extensionName;
-    const pageToOpen = data.pageToOpen;
+  socket.onopen = () => {
+    console.log("Socket open");
+  };
 
-    chrome.management.getAll(extensions => {
-      extensions.forEach(async ext => {
-        if (
-          ext.installType === "development" &&
-          ext.type === "extension" &&
-          ext.name === extName
-        ) {
-          await reloadExtension(ext.id);
-          if (pageToOpen) {
-            await openPage(ext.id, pageToOpen);
+  socket.onmessage = event => {
+    try {
+      const data = JSON.parse(event.data);
+      const extName = data.extensionName;
+      const pageToOpen = data.pageToOpen;
+
+      chrome.management.getAll(extensions => {
+        extensions.forEach(async ext => {
+          if (
+            ext.installType === "development" &&
+            ext.type === "extension" &&
+            ext.name === extName
+          ) {
+            await reloadExtension(ext.id);
+            if (pageToOpen) {
+              await openPage(ext.id, pageToOpen);
+            }
           }
-        }
+        });
       });
-    });
-  } catch {}
-};
+    } catch {}
+  };
+
+  socket.onerror = err => {
+    console.log(err);
+  };
+
+  socket.onclose = () => {
+    console.log("Socket closed");
+    createAlarm();
+  };
+}
+
+chrome.alarms.onAlarm.addListener(alarm => {
+  if (alarm.name === ALARM_NAME) {
+    createSocket();
+  }
+});
+
+createAlarm(true);
