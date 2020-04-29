@@ -4,7 +4,7 @@
 
 <style>
   hr {
-    margin: 20px 0 30px;
+    margin: 0;
     padding: 0;
     border: none;
     background-color: #e9e5e6;
