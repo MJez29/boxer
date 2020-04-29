@@ -27,11 +27,18 @@ export async function readFiles(files: File[]) {
   return await Promise.all(files.map(readFile));
 }
 
-export function getAliasesFromJson(json: any): Alias[] {
-  let array: unknown[] | null = null;
+type JSON = null | boolean | number | string | { [x: string]: JSON } | JSON[];
+
+export function getAliasesFromJson(json: JSON): Alias[] {
+  let array: JSON[] | null = null;
   if (Array.isArray(json)) {
     array = json;
-  } else if (Array.isArray(json.aliases)) {
+  } else if (
+    typeof json === "object" &&
+    json !== null &&
+    "aliases" in json &&
+    Array.isArray(json.aliases)
+  ) {
     array = json.aliases;
   }
 
@@ -69,7 +76,7 @@ export async function getAliasesFromUrl(url: string): Promise<Alias[]> {
   } catch {
     throw new HttpError(res ?? url);
   }
-  let json;
+  let json: JSON;
   try {
     json = await res.json();
   } catch {
