@@ -1,8 +1,7 @@
 <script>
   import { createEventDispatcher, onMount } from "svelte";
-  import { Checkbox, Button, Icon, FileUpload } from "@lib/components";
+  import { Checkbox, Button, Icon } from "@lib/components";
   import { downloadAliases } from "@lib/download";
-  import { getAliasesFromFiles } from "@lib/import";
   import AliasRow from "./AliasRow";
   import { getToastContext, getModalContext } from "@options/contexts";
   import ImportAliasesModal from "@options/components/ImportAliasesModal";

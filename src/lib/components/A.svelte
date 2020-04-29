@@ -55,7 +55,7 @@
   .transparent:hover,
   .transparent:focus,
   .transparent:focus-within {
-    background-color: rgba(41, 4, 11, 0.1);
+    background-color: #e9e5e6;
     text-decoration: none;
   }
 

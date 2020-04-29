@@ -5,6 +5,7 @@
   export let value = "";
   export let embed = false;
   export let autofocus = false;
+  export let code = false;
 
   let outlined = !embed;
 
@@ -26,8 +27,6 @@
     dispatch("input", event.target.value);
   }
 
-  $: focusClass = focused ? "focus" : "";
-
   export const focus = () => {
     inputEl.focus();
   };
@@ -38,7 +37,7 @@
 </script>
 
 <style>
-  input {
+  textarea {
     font-size: 1rem;
     line-height: 1rem;
     border: none;
@@ -47,9 +46,18 @@
     display: block;
     width: 100%;
     padding-bottom: 10px;
+    resize: none;
+    min-height: 600px;
   }
 
-  input.embed {
+  .code {
+    font-family: "Roboto Mono", monospace;
+    white-space: pre;
+    overflow-wrap: normal;
+    overflow: auto;
+  }
+
+  textarea.embed {
     padding: 0;
   }
 
@@ -99,10 +107,11 @@
 
 <!-- svelte-ignore a11y-autofocus -->
 <div class="container" class:focused class:embed>
-  <input
+  <textarea
     class="input"
     class:embed
     class:outlined
+    class:code
     bind:this={inputEl}
     on:focus={onFocus}
     on:blur={onBlur}
@@ -110,5 +119,6 @@
     {value}
     {placeholder}
     {autofocus}
+    spellcheck={!code}
     aria-placeholder={placeholder} />
 </div>

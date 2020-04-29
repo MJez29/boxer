@@ -6,29 +6,48 @@
 
   let modal;
   let props;
-  let resolve;
+  let promiseResolvers = [];
 
-  const resolveExistingPromise = () => {
-    if (resolve) {
-      resolve();
+  const resolveExistingPromises = () => {
+    if (promiseResolvers.length > 0) {
+      promiseResolvers.forEach(resolve => resolve());
     }
-    resolve = undefined;
+    promiseResolvers = [];
   };
 
-  const showModal = (newModal, newProps) => {
-    resolveExistingPromise();
+  /**
+   * Display a modal, closing the open one if necessary.
+   */
+  const showModal = (newModal, newProps = {}) => {
+    resolveExistingPromises();
     modal = newModal;
     props = newProps;
     document.body.style.overflowY = "hidden";
     return new Promise(res => {
-      resolve = res;
+      promiseResolvers = [...promiseResolvers, res];
     });
   };
 
+  /**
+   * Close the open modal
+   */
   const hideModal = () => {
-    resolveExistingPromise();
+    resolveExistingPromises();
     modal = null;
     document.body.style.overflowY = "auto";
+  };
+
+  /**
+   * Equivalent to showModal except that the existing resolve promise is maintained
+   */
+  const replaceModal = (newModal, newProps = {}) => {
+    console.log(newModal, newProps);
+    modal = newModal;
+    props = newProps;
+    document.body.style.overflowY = "hidden";
+    return new Promise(res => {
+      promiseResolvers = [...promiseResolvers, res];
+    });
   };
 
   const stopPropagation = event => {
@@ -37,7 +56,8 @@
 
   setContext(MODAL_KEY, {
     showModal,
-    hideModal
+    hideModal,
+    replaceModal
   });
 </script>
 
@@ -67,6 +87,9 @@
 
   .content {
     position: relative;
+    border-radius: 4px;
+    background-color: white;
+    padding: 30px;
   }
 
   .close-button {

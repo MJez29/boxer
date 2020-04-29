@@ -7,7 +7,6 @@
     Card,
     Icon,
     Button,
-    FileUpload,
     Header,
     Checkbox,
     TextInput,
@@ -75,7 +74,7 @@
 
 <style>
   .alias {
-    border-bottom: 2px solid rgba(41, 4, 11, 0.1);
+    border-bottom: 2px solid #e9e5e6;
     height: 40px;
     display: flex;
     align-items: center;

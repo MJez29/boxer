@@ -14,7 +14,6 @@
     Card,
     Icon,
     Button,
-    FileUpload,
     Header,
     Checkbox,
     Hr,
@@ -24,9 +23,9 @@
   } from "@lib/components";
   import { getAliasesFromBookmarks } from "@lib/bookmarks";
   import { getAliasesFromHistory } from "@lib/history";
-  import { getAliasesFromFiles } from "@lib/import";
   import AliasTable from "@options/components/AliasTable";
   import ImportAliasesModal from "@options/components/ImportAliasesModal.svelte";
+  import ImportAliasPackModal from "@options/components/ImportAliasPackModal";
 
   const { displayToast } = getToastContext();
   const { showModal } = getModalContext();
@@ -94,13 +93,8 @@
     refreshAliases();
   }
 
-  async function onImportFileClick(e) {
-    console.log(e.target.files);
-    const fileAliases = await getAliasesFromFiles(e.target.files);
-    console.log(fileAliases);
-    await showModal(ImportAliasesModal, {
-      aliases: fileAliases
-    });
+  async function onImportAliasPackClick() {
+    await showModal(ImportAliasPackModal);
     refreshAliases();
   }
 </script>
@@ -149,15 +143,10 @@
       </Button>
     </div>
     <div class="action-button">
-      <FileUpload
-        multiple
-        accept="application/json"
-        on:input={onImportFileClick}>
-        <Button padded primary>
-          <Icon name="upload" />
-          &nbsp;Import file
-        </Button>
-      </FileUpload>
+      <Button padded primary on:click={onImportAliasPackClick}>
+        <Icon name="upload" />
+        &nbsp;Import alias pack
+      </Button>
     </div>
   </div>
 </div>

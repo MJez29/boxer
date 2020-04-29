@@ -1,0 +1,12 @@
+{
+  "aliases": [
+    {
+      "name": "foo",
+      "link": "https://foo.com"
+    },
+    {
+      "name": "bar",
+      "link": "https://bar.com"
+    }
+  ]
+}

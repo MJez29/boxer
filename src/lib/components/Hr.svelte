@@ -4,15 +4,13 @@
 
 <style>
   hr {
-    margin: 0;
+    margin: 20px 0 30px;
     padding: 0;
     border: none;
-    background-color: rgba(41, 4, 11, 0.1);
+    background-color: #e9e5e6;
     height: 2px;
     width: 100%;
     position: relative;
-    left: -55px;
-    width: calc(100% + 110px);
   }
 </style>
 

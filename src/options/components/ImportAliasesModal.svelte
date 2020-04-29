@@ -4,6 +4,7 @@
   import { Header, P, Button } from "@lib/components";
   import { getModalContext } from "@options/contexts";
   import { mergeAliases } from "@lib/storage";
+  import ModalFooter from "@options/components/ModalFooter";
 
   export let aliases = [];
 
@@ -52,16 +53,6 @@
   .heading {
     margin-bottom: 25px;
   }
-
-  .footing {
-    margin-top: 25px;
-    display: flex;
-    flex-direction: row-reverse;
-  }
-
-  .primary-button {
-    margin-left: 20px;
-  }
 </style>
 
 <div class="content">
@@ -75,10 +66,7 @@
     on:deleteAlias={onDeleteAlias}
     on:deleteAliases={onDeleteAliases}
     on:aliasChange={onAliasChange} />
-  <div class="footing">
-    <div class="primary-button">
-      <Button primary padded on:click={importAliases}>Add aliases</Button>
-    </div>
-    <Button transparent padded on:click={hideModal}>Cancel</Button>
-  </div>
+  <ModalFooter on:confirm={importAliases} on:cancel={hideModal}>
+    <slot name="confirm">Add aliases</slot>
+  </ModalFooter>
 </div>
