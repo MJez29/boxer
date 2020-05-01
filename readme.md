@@ -1,7 +1,11 @@
 # Boxer
 
-A (wip) chrome extension that allows you to add keyword shortcuts to the chrome omnibar (big search bar at the top).
+<div align="center">
+  <img src="./static/icon-128.png" />
+</div>
 
-In chrome to enter Boxer mode you must type `/` followed by a tab or a space and then your keyword(s).
+Boxer is a browser extension that allows you to register aliases in the form of a series of keywords for sites you frequent often. Typing these aliases into Boxer will bring you exactly where you want to go!
 
-For example, assuming an existing alias, I could type `/ github` and then press enter to be brought to `https://github.com/MJez29`.
+### Install
+
+You can add Boxer to Chrome from [here](https://chrome.google.com/webstore/detail/boxer/moabiobfjcalccfopcaihnmnalmnipcn).
