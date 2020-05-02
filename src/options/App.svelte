@@ -5,6 +5,7 @@
   import Nav from "./sections/Nav";
   import Route from "./components/Route";
   import ModalPortal from "./components/ModalPortal";
+  import Redirect from "./components/Redirect";
 </script>
 
 <style>
@@ -32,9 +33,9 @@
 
     <!-- <Hero /> -->
     <div class="content">
-      <Route component={Aliases} />
       <Route name="aliases" component={Aliases} />
       <Route name="about" component={About} />
+      <Redirect name="aliases" />
     </div>
 
   </ModalPortal>

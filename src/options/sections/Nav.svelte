@@ -40,7 +40,7 @@
   }
 </style>
 
-<nav>
+<nav aria-label="main navigation">
   <div class="logo-container">
     <img
       class="logo"
@@ -48,7 +48,7 @@
       alt="A pair of boxing gloves" />
     <span class="boxer">Boxer</span>
   </div>
-  <div class="navlinks">
+  <div class="navlinks" aria-label="main navigation links">
     <NavLink name="aliases">Aliases</NavLink>
     <NavLink name="about">About</NavLink>
   </div>

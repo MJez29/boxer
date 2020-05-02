@@ -26,7 +26,6 @@
 <style>
   .container {
     position: relative;
-    background-color: #b00f30;
   }
 
   a {
@@ -37,38 +36,37 @@
     text-decoration: none;
     margin-bottom: 20px;
     position: relative;
-    z-index: 1;
+    transition: all 0.2s ease;
   }
 
-  .bg {
-    position: absolute;
-    top: 0;
-    right: 100%;
-    left: 0;
-    bottom: 0;
-    background-color: #960e29;
-    transition: right 0.2s ease;
-    z-index: 0;
+  a:hover {
+    background-color: #b00f30;
   }
 
-  .bg.animate {
-    right: 0;
-  }
-
-  .bg.active.active::after {
+  .container::before {
     content: "";
     position: absolute;
     top: 0;
-    right: calc(100% - 5px);
+    right: 100%;
     bottom: 0;
     left: 0;
+    z-index: 9;
     background-color: #f5f5f5;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    transition: all 0.2s ease;
+    right: calc(100% - 5px);
+    opacity: 0;
+  }
+
+  .container.active::before {
+    opacity: 1;
   }
 </style>
 
-<div class="container">
-  <span class="bg" class:animate class:active />
+<div class="container" class:active>
   <a
+    aria-current={active ? 'page' : 'false'}
     href={`?path=${name}`}
     on:click={onClick}
     on:mouseover={animateIn}
