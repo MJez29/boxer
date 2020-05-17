@@ -45,7 +45,6 @@
 <style>
   .content {
     background-color: white;
-    padding: 25px;
     width: 1000px;
     max-width: calc(100vw - 100px);
   }

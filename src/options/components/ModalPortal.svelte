@@ -89,13 +89,13 @@
     position: relative;
     border-radius: 4px;
     background-color: white;
-    padding: 30px;
+    padding: 50px;
   }
 
   .close-button {
     position: absolute;
-    top: 25px;
-    right: 25px;
+    top: 15px;
+    right: 15px;
   }
 </style>
 
